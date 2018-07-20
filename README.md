@@ -6,6 +6,8 @@ _Wot?_
 
 ### Development
 
+⚠️ WIP THIS WON'T WORK YET ⚠️
+
 1.  Clone the repo.
 2.  Install dependencies
 
