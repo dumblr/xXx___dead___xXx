@@ -24,8 +24,14 @@ yarn start
 4.  Okay, it's going to get a little weird here.
 5.  Create a new Dat site in your Beaker Browser library.
 6.  Add your Dat url to config.js
-7.  Run a build
+7.  Replace the contents of `dat.json` with your new `dat.json` (Not sure this is completely necessary)
+8.  Run a build
 
 ```bash
 yarn run build
 ```
+
+9.  Add the contents from your `/build` folder to your new site's library.
+10. The output should look something like this:
+
+![example](./example.png)
