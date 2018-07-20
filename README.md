@@ -35,3 +35,5 @@ yarn run build
 10. The output should look something like this:
 
 ![example](./example.png)
+
+11. You should be able to navigate to your localhost address now, and still pull posts/data from your dat site.
