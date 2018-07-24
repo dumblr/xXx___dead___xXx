@@ -36,6 +36,7 @@ export const Textarea = styled.textarea`
 `;
 
 export const Submit = styled.input`
+  cursor: pointer;
   border: 1px solid black;
   background: radial-gradient(ellipse at top, #1bbac6, transparent),
     radial-gradient(ellipse at bottom, #d99852, transparent);

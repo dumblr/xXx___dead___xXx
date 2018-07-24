@@ -1,5 +1,5 @@
-const fileContents = (linkStr, linkDescStr) => `{
-    "postId": "sldfkj23lk49sdfjk234",
+const fileContents = (linkStr, linkDescStr, postIdStr) => `{
+    "postId": "${postIdStr}",
     "titleContent": "${linkStr}",
     "textContent": "${linkDescStr}",
     "createdAt": "${Date.now()}"

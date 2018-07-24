@@ -4,10 +4,11 @@ import {
   EachListItem,
   LinkTitle,
   LinkDescription,
-  LinkTag
+  LinkTag,
+  LinkDelete
 } from './styles';
 
-const LinkList = ({ links }) => (
+const LinkList = ({ links, isOwner, deleteFn }) => (
   <ListWrapper>
     {links.map((link, i) => (
       <EachListItem key={i}>
@@ -15,6 +16,9 @@ const LinkList = ({ links }) => (
           <LinkTag href={link.titleContent}>{link.titleContent}</LinkTag>
         </LinkTitle>
         <LinkDescription>{link.textContent}</LinkDescription>
+        {isOwner && (
+          <LinkDelete onClick={() => deleteFn(link.postId)}>Delete</LinkDelete>
+        )}
       </EachListItem>
     ))}
   </ListWrapper>

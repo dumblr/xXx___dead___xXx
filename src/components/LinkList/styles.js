@@ -32,5 +32,12 @@ export const LinkTag = styled.a`
 export const LinkDescription = styled.p`
   font-size: 13px;
   line-height: 15px;
-  margin: 0;
+  margin: 0 0 10px;
+`;
+
+export const LinkDelete = styled.button`
+  cursor: pointer;
+  border: 1px solid black;
+  background: radial-gradient(ellipse at top, #1bbac6, transparent),
+    radial-gradient(ellipse at bottom, #d99852, transparent);
 `;
