@@ -1,54 +1,114 @@
 import React, { Component } from 'react';
 import { DAT_URL } from './config';
+import LinkForm from './components/LinkForm';
+import LinkList from './components/LinkList';
+import Header from './components/Header';
+import fileContents from './utils/fileContents';
+import { v4 } from 'uuid';
+import NoPosts from './components/NoPosts';
 
 class App extends Component {
-  state = {
-    posts: []
-  };
-  componentDidMount() {
-    const archive = new global.DatArchive(DAT_URL);
+  constructor(props) {
+    super(props);
+    this.state = {
+      posts: [],
+      linkField: '',
+      textareaField: '',
+      isOwner: false,
+      listTitle: ''
+    };
+  }
 
+  async componentDidMount() {
+    const archive = await new global.DatArchive(DAT_URL);
+    const archiveInfo = await archive.getInfo();
+    console.log('info', archiveInfo);
     this.getPosts(archive);
+    this.setInfo(archiveInfo);
   }
 
   getPosts = async archive => {
-    const postsState = [];
-    // read directory to get all file names
     const posts = await archive.readdir('/posts');
 
-    // map over all file names, add each object to an array
-    await posts.map(async post => {
-      await console.log('post file name', post);
-      // read the entire file
-      const thing = await archive.readFile(`/posts/${post}`);
-      await console.log(JSON.parse(thing));
-      // add object to array
-      postsState.push(JSON.parse(thing));
-      return '';
+    posts.map(async post => {
+      // wow what a hack
+      if (post !== '.DS_Store') {
+        const postItem = await archive.readFile(`/posts/${post}`);
+        let myPosts = this.state.posts;
+        myPosts.push(JSON.parse(postItem));
+        this.setState({
+          posts: myPosts
+        });
+      }
     });
-
-    // a setState function
-    this.savePosts(postsState);
   };
 
-  // setState
-  savePosts = posts => {
+  setInfo = archiveInfo => {
+    if (archiveInfo.isOwner) {
+      this.setState({
+        isOwner: true,
+        listTitle: archiveInfo.title
+      });
+    } else {
+      this.setState({
+        listTitle: archiveInfo.title
+      });
+    }
+  };
+
+  fieldChange = (e, str) => {
     this.setState({
-      posts
+      [str]: e.target.value
     });
+  };
+
+  formSubmit = e => {
+    e.preventDefault();
+    this.writePost(this.state.linkField, this.state.textareaField);
+  };
+
+  writePost = async (linkField, textareaField) => {
+    const newPostId = await v4();
+    const archive = await new global.DatArchive(DAT_URL);
+    await archive.writeFile(
+      `/posts/${newPostId}.json`,
+      fileContents(linkField, textareaField, newPostId)
+    );
+
+    this.setState({
+      textareaField: '',
+      linkField: ''
+    });
+  };
+
+  deleteLink = async postId => {
+    console.log('deleting', postId);
+    const archive = await new global.DatArchive(DAT_URL);
+    await archive.unlink(`/posts/${postId}.json`);
   };
 
   render() {
     return (
       <div>
-        {/* Initially, this will be empty, which is fine */}
-        {/* A after we setState, this will re-render, and it will have all of our posts */}
-        {console.log('posts in render', this.state.posts)}
-        {/* This ternary will be true, but posts wont render from state? Why?  */}
-        {this.state.posts ? (
-          <div>yes {this.state.posts.map(x => <div>x.postId</div>)}</div>
+        {console.log(this.state.posts)}
+        <Header listTitle={this.state.listTitle} />
+        {this.state.isOwner && (
+          <LinkForm
+            changeFn={this.fieldChange}
+            submitFn={this.formSubmit}
+            linkField={this.state.linkField}
+            textareaField={this.state.textareaField}
+          />
+        )}
+
+        {this.state.posts.length ? (
+          <LinkList
+            links={this.state.posts}
+            isOwner={this.state.isOwner}
+            deleteFn={this.deleteLink}
+          />
         ) : (
-          <div>no</div>
+          <NoPosts />
         )}
       </div>
     );
