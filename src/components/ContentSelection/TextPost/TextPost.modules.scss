@@ -1,0 +1,107 @@
+@import '../../../styles/mixins';
+@import '../../../styles/variables';
+
+.TextPost {
+
+	form {
+		max-width: 400px;
+		width: 100%;
+	}
+}
+
+.FormElement {
+	margin-bottom: 20px;
+	position: relative;
+	width: 100%;
+
+	input[type="text"], textarea {
+		backface-visibility: hidden;
+		background: $transparentWhite;
+		border: 1px solid $lightgrey;
+		border-radius: 2px;
+		font-size: 18px;
+		outline: none;
+		padding: 10px;
+		position: relative;
+		width: 100%;
+		z-index: 3;
+
+		&:focus {
+			outline: none;
+
+			~ label {
+				font-size: 12px;
+				z-index: 4;
+				transform: translate(0px, -35px);
+			}
+		}
+	}
+
+	label {
+		font-weight: bold;
+		left: 13px;
+		position: absolute;
+		text-transform: uppercase;
+		top: 12px;
+		transition: transform 200ms ease;
+		user-select: none;
+	}
+}
+
+.FormElementCheckbox {
+	align-items: center;
+	display: flex;
+	justify-content: flex-start;
+
+	input[type="checkbox"] {
+		-webkit-appearance: none;
+		appearance: none;
+		backface-visibility: hidden;
+		background: $white;
+		margin-bottom: 20px;
+		outline: none;
+		position: relative;
+		transition: background 200ms ease;
+		z-index: 2;
+
+		&:checked {
+			background: $black;
+
+			~ label {
+				opacity: 1.0;
+			}
+		}
+	}
+
+    label {
+      	color: $black;
+        font-size: 12px;
+        font-weight: bold;
+        left: 8px;
+        opacity: 0.4;
+        position: relative;
+        top: -8px;
+        text-transform: uppercase;
+        transition: opacity 200ms ease;
+    }
+}
+
+.FormElementTextArea {
+	padding-top: 15px;
+
+	label {
+		top: 27px;
+	}
+}
+
+.FormElementActive {
+
+	input[type="text"], textarea {
+
+		~ label {
+			font-size: 12px;
+			transform: translate(0px, -35px);
+			z-index: 4;
+		}
+	}
+}
