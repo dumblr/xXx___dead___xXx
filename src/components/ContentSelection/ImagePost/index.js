@@ -1,6 +1,5 @@
 import React from 'react';
 
-import styles from './ImagePost.modules.scss';
 import Button from '../../SharedComponents/Button';
 
 class ImagePost extends React.Component {
@@ -28,11 +27,11 @@ class ImagePost extends React.Component {
 
   render() {
     return (
-      <div className={styles.ImagePost}>
+      <div className={'ImagePost'}>
         <form encType="multipart/form-data">
           <div
-            className={`${styles.FormElement} ${
-              this.state.titleImage !== '' ? styles.FormElementActive : ''
+            className={`${'FormElement'} ${
+              this.state.titleImage !== '' ? 'FormElementActive' : ''
             }`}
           >
             <input
@@ -45,9 +44,9 @@ class ImagePost extends React.Component {
             <label htmlFor="title-entry">Title</label>
           </div>
 
-          <div className={styles.Box}>
+          <div className={'Box'}>
             <input
-              className={styles.Box__File}
+              className={'Box__File'}
               type="file"
               name="files[]"
               id="file"
@@ -56,13 +55,13 @@ class ImagePost extends React.Component {
             />
             <label htmlFor="file">
               Choose a file
-              <span className={styles.Box__Dragndrop}> or drag it here</span>
+              <span className={'Box__Dragndrop'}> or drag it here</span>
             </label>
           </div>
 
           <div
-            className={`${styles.FormElement} ${
-              this.state.descriptionImage !== '' ? styles.FormElementActive : ''
+            className={`${'FormElement'} ${
+              this.state.descriptionImage !== '' ? 'FormElementActive' : ''
             }`}
           >
             <input
@@ -75,7 +74,7 @@ class ImagePost extends React.Component {
             <label htmlFor="description-entry">Image Description</label>
           </div>
 
-          <div className={styles.FormElementCheckbox}>
+          <div className={'FormElementCheckbox'}>
             <input type="checkbox" id="whisperImage" />
             <label htmlFor="whisperImage">Keep this post to myself</label>
           </div>

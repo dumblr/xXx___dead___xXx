@@ -1,6 +1,4 @@
 import React from 'react';
-
-import styles from './Header.modules.scss';
 import ContentSelection from '../ContentSelection';
 
 class Header extends React.Component {
@@ -23,23 +21,23 @@ class Header extends React.Component {
 
   render() {
     return (
-      <header className={styles.Header}>
-        <div className={styles.Header__Nav}>
+      <header className={`Header`}>
+        <div className={`Header__Nav`}>
           <a
-            className={`${styles.ContentToggle} ${
-              this.state.contentSelectionOpen ? styles.ContentToggle_Open : ''
+            className={`${'ContentToggle'} ${
+              this.state.contentSelectionOpen ? 'ContentToggle_Open' : ''
             }`}
             onClick={() => this.toggleContentSelection()}
           >
             <img src="/images/icon-plus.svg" alt="plus icon" />
           </a>
-          <div className={styles.ContentDisplayToggle}>
+          <div className={'ContentDisplayToggle'}>
             <a
               className={`
-								${styles.ContentDisplayToggle__Item} 
+								${'ContentDisplayToggle__Item'} 
 								${
                   this.props.postDisplay === 'mine'
-                    ? styles.ContentDisplayToggle__Item_Selected
+                    ? 'ContentDisplayToggle__Item_Selected'
                     : ''
                 }
 							`}
@@ -49,10 +47,10 @@ class Header extends React.Component {
             </a>
             <a
               className={`
-								${styles.ContentDisplayToggle__Item} 
+								${'ContentDisplayToggle__Item'} 
 								${
                   this.props.postDisplay === 'theirs'
-                    ? styles.ContentDisplayToggle__Item_Selected
+                    ? 'ContentDisplayToggle__Item_Selected'
                     : ''
                 }
 							`}

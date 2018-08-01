@@ -12,7 +12,7 @@ class PostContainer extends React.Component {
     };
 
     this.togglePostDisplay = this.togglePostDisplay.bind(this);
-    this.getPost = this.getPost.bind(this);
+    //   this.getPost = this.getPost.bind(this);
   }
 
   togglePostDisplay(val) {
@@ -22,18 +22,15 @@ class PostContainer extends React.Component {
   }
 
   async getPost(archive, postId) {
-    let myPost = await archive.readFile('/mine/posts/' + postId + '.json');
-    let post = JSON.parse(myPost);
-
-    this.setState({
-      postData: post
-    });
+    // let myPost = await archive.readFile('/mine/posts/' + postId + '.json');
+    // let post = JSON.parse(myPost);
+    // this.setState({
+    //   postData: post
+    // });
   }
 
   componentDidMount() {
-    const archive = new global.DatArchive(
-      `e03d0ae6a70caebf2f65408b77d5737ff18863568618594132ea7f76861852e7`
-    );
+    const archive = this.props.data;
     this.getPost(archive, this.props.match.params.postId);
   }
 
@@ -44,7 +41,7 @@ class PostContainer extends React.Component {
           postDisplay={this.state.postDisplay}
           togglePostDisplay={this.togglePostDisplay}
         />
-        <Post data={this.state.postData} />
+        <Post data={this.props.postData} />
       </div>
     );
   }

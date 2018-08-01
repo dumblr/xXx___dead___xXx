@@ -1,0 +1,142 @@
+@import './mixins';
+@import './variables';
+
+.ContentView {
+	margin: 0 auto;
+	max-width: $readwidth;
+	padding-top: 100px;
+}
+
+.Post {
+	margin: 0 auto;
+	max-width: $readwidth;
+	padding-top: 100px;
+
+	&__Title {
+		padding-bottom: 30px;
+	}
+
+	&__Content {
+		color: red;
+	}
+}
+
+
+.Header {
+	background-color: $transparentWhite;
+	margin: 0 auto;
+	max-width: $fullwidth;
+	padding: 18px 20px;
+	position: fixed;
+	width: 100%;
+
+	&__Nav {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		position: relative;
+		z-index: 4;
+	}
+}
+
+.ContentToggle {
+	cursor: pointer;
+	display: inline-block;
+	position: relative;
+	tranform: rotate(0deg);
+	transition: transform 200ms ease;
+
+	&_Open {
+		transform: rotate(45deg);
+	}
+
+	img {
+		height: auto;
+		width: 40px;
+	}
+}
+
+.ContentDisplayToggle {
+
+	&__Item {
+		cursor: pointer;
+		display: inline-block;
+		margin-left: 15px;
+		opacity: 0.4;
+		transition: opacity 200ms ease;
+
+		&:hover {
+			opacity: 0.7;
+		}
+
+		&_Selected {
+			opacity: 1.0;
+		}
+	}
+
+	img {
+		height: auto;
+		width: 40px;
+	}
+}
+
+
+.ContentItem {
+	display: grid;
+	grid-auto-rows: minmax(0px, auto);
+	grid-column-gap: 60px;
+	grid-row-gap: 20px;
+	grid-template-columns: 45px auto;
+	padding-bottom: 60px;
+
+	&__Date {
+
+		p {
+			@include title();
+			text-align: right;
+		}
+	}
+
+	&__View {
+
+		h2 {
+			@include title();
+		}
+
+		h3 {
+
+			a {
+				color: $black;
+				text-decoration: none;
+			}
+		}
+	}
+
+	p {
+		max-width: 540px;
+	}
+}
+
+.Button {
+	background-color: #000000;
+	border: 1px solid #000000;
+	border-radius: 2px;
+	color: #FFFFFF;
+	cursor: pointer;
+	display: inline-block;
+	margin: 20px 0;
+	padding: 6px 20px;
+	transition: background-color 200ms ease, color 200ms ease;
+
+	&:hover {
+		background-color: #FFFFFF;
+		color: #000000;
+	}
+}
+
+.ImagePost {
+
+	img {
+		max-width: 100%;
+	}
+}

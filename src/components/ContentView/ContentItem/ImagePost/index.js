@@ -1,10 +1,8 @@
 import React from 'react';
 
-import styles from './ImagePost.modules.scss';
-
 const ImagePost = props => {
   return (
-    <div className={styles.ImagePost}>
+    <div className={'ImagePost'}>
       <img src={'/files/mine/assets/' + props.source} alt={props.altText} />
     </div>
   );

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import styles from './ContentItem.modules.scss';
 import TextPost from './TextPost';
 import ImagePost from './ImagePost';
 
@@ -55,15 +54,15 @@ const ContentItem = props => {
   }
 
   return (
-    <div className={styles.ContentItem}>
-      <div className={styles.ContentItem__Date}>
+    <div className={'ContentItem'}>
+      <div className={'ContentItem__Date'}>
         <p>
           {MonthWord}
           <br />
           {Day}
         </p>
       </div>
-      <div className={styles.ContentItem__View}>
+      <div className={'ContentItem__View'}>
         <h2>
           {props.vals.author_avatar} {props.vals.author} @ {Time}
         </h2>

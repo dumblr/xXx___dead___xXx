@@ -1,9 +1,7 @@
 import React from 'react';
-
 import ContentItem from '../ContentItem';
 
 const ContentViewLoop = ({ posts }) => {
-  console.log('posts', posts);
   if (posts.length > 0) {
     return (
       <div>{posts.map((item, i) => <ContentItem vals={item} key={i} />)}</div>

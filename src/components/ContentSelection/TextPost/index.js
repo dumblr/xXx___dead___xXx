@@ -1,12 +1,6 @@
 import React from 'react';
 
-import styles from './TextPost.modules.scss';
-
 import Button from '../../SharedComponents/Button';
-
-const archive = new global.DatArchive(
-  `e03d0ae6a70caebf2f65408b77d5737ff18863568618594132ea7f76861852e7`
-);
 
 class TextPost extends React.Component {
   constructor(props) {
@@ -71,18 +65,16 @@ class TextPost extends React.Component {
       ]
     };
 
-    await archive.writeFile('/mine/posts/' + id + '.json', outputJson);
-
-    console.log('frogs', outputJson);
+    // await archive.writeFile('/mine/posts/' + id + '.json', outputJson);
   }
 
   render() {
     return (
-      <div className={styles.TextPost}>
+      <div className={'TextPost'}>
         <form id="textformSubmit">
           <div
-            className={`${styles.FormElement} ${
-              this.state.titleContent !== '' ? styles.FormElementActive : ''
+            className={`${'FormElement'} ${
+              this.state.titleContent !== '' ? 'FormElementActive' : ''
             }`}
           >
             <input
@@ -96,8 +88,8 @@ class TextPost extends React.Component {
           </div>
 
           <div
-            className={`${styles.FormElement} ${styles.FormElementTextArea} ${
-              this.state.textContent !== '' ? styles.FormElementActive : ''
+            className={`${'FormElement'} ${'FormElementTextArea'} ${
+              this.state.textContent !== '' ? 'FormElementActive' : ''
             }`}
           >
             <textarea
@@ -111,7 +103,7 @@ class TextPost extends React.Component {
             <label htmlFor="content-entry">Content</label>
           </div>
 
-          <div className={styles.FormElementCheckbox}>
+          <div className={'FormElementCheckbox'}>
             <input type="checkbox" id="whisperPost" />
             <label htmlFor="whisperPost">Keep this post to myself</label>
           </div>

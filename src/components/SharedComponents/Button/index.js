@@ -1,17 +1,15 @@
 import React from 'react';
 
-import styles from './Button.modules.scss';
-
 const Button = props => {
   if (props.buttonClickFunction) {
     return (
-      <a className={styles.Button} onClick={() => props.buttonClickFunction()}>
+      <a className={'Button'} onClick={() => props.buttonClickFunction()}>
         {props.buttonText ? props.buttonText : 'submit'}
       </a>
     );
   } else {
     return (
-      <a className={styles.Button}>
+      <a className={'Button'}>
         {props.buttonText ? props.buttonText : 'submit'}
       </a>
     );

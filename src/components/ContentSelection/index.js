@@ -1,7 +1,5 @@
 import React from 'react';
 
-import styles from './ContentSelection.modules.scss';
-
 import ImagePost from './ImagePost';
 import TextPost from './TextPost';
 
@@ -27,30 +25,30 @@ class ContentSelection extends React.Component {
     return (
       <div
         className={`
-				${styles.ContentSelection}
-				${this.props.open ? styles.ContentSelection__Open : ''}
+				${'ContentSelection'}
+				${this.props.open ? 'ContentSelection__Open' : ''}
 			`}
       >
         <div
           className={`
-					${styles.ContentSelection__Wrapper}
-					${this.state.showPostType !== '' ? styles.ContentSelection__ShowForm : ''}
+					${'ContentSelection__Wrapper'}
+					${this.state.showPostType !== '' ? 'ContentSelection__ShowForm' : ''}
 				`}
         >
           <div
             className={`
-						${styles.ContentSelection__Items}
-						${this.state.showPostType !== '' ? styles.ContentSelection__Items_Slim : ''}
+						${'ContentSelection__Items'}
+						${this.state.showPostType !== '' ? 'ContentSelection__Items_Slim' : ''}
 					`}
           >
             <div
               className={`
-								${styles.ContentSelection__Item}
+								${'ContentSelection__Item'}
 								${
                   this.state.showPostType === '' ||
                   this.state.showPostType === 'image'
                     ? ''
-                    : styles.ContentSelection__Item_Hide
+                    : 'ContentSelection__Item_Hide'
                 }
 							`}
               onClick={() => this.togglePostType('image')}
@@ -63,12 +61,12 @@ class ContentSelection extends React.Component {
             </div>
             <div
               className={`
-								${styles.ContentSelection__Item}
+								${'ContentSelection__Item'}
 								${
                   this.state.showPostType === '' ||
                   this.state.showPostType === 'text'
                     ? ''
-                    : styles.ContentSelection__Item_Hide
+                    : 'ContentSelection__Item_Hide'
                 }
 							`}
               onClick={() => this.togglePostType('text')}
@@ -80,8 +78,8 @@ class ContentSelection extends React.Component {
 
           <div
             className={`
-						${styles.ContentSelection__Display}
-						${this.state.showPostType !== '' ? '' : styles.ContentSelection__Display_Hide}
+						${'ContentSelection__Display'}
+						${this.state.showPostType !== '' ? '' : 'ContentSelection__Display_Hide'}
 					`}
           >
             {this.state.showPostType === 'image' && <ImagePost />}

@@ -1,10 +1,8 @@
 import React from 'react';
 
-import styles from './TextPost.modules.scss';
-
 const TextPost = props => {
   return (
-    <div className={styles.TextPost}>
+    <div className={'TextPost'}>
       {props.text_data.length > 0 &&
         props.text_data.map((item, i) => (
           <div key={i}>
