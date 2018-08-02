@@ -26,7 +26,10 @@ class ContentViewContainer extends React.Component {
           postDisplay={this.state.postDisplay}
           togglePostDisplay={this.togglePostDisplay}
         />
-        <ContentView postDisplay={this.props.posts} />
+        <ContentView
+          postDisplay={this.state.postDisplay}
+          posts={this.props.posts}
+        />
       </div>
     );
   }

@@ -7,8 +7,8 @@ class TextPost extends React.Component {
     super(props);
     this.state = {
       titleContent: '',
-      textContent: '',
-      whisperContent: ''
+      textContent: ''
+      // whisperContent: ''
     };
 
     this.valueUpdater = this.valueUpdater.bind(this);
@@ -103,10 +103,10 @@ class TextPost extends React.Component {
             <label htmlFor="content-entry">Content</label>
           </div>
 
-          <div className={'FormElementCheckbox'}>
+          {/* <div className={'FormElementCheckbox'}>
             <input type="checkbox" id="whisperPost" />
             <label htmlFor="whisperPost">Keep this post to myself</label>
-          </div>
+          </div> */}
         </form>
         <Button buttonClickFunction={this.createTextPost} />
       </div>

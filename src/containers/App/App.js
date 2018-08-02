@@ -35,21 +35,13 @@ class App extends Component {
   };
 
   render() {
+    console.log('app', this.state.posts);
     return (
       <div>
-        <ContentViewContainer posts={this.state.posts} />
+        <ContentViewContainer posts={this.state.posts} postDisplay={'mine'} />
       </div>
     );
   }
 }
 
 export default App;
-
-const Post = ({ posts }) => {
-  return (
-    <div>
-      <h1>Dead: {posts.length}</h1>
-      {posts.map((post, i) => <div key={i}>Frogs: {post.postId}</div>)}
-    </div>
-  );
-};

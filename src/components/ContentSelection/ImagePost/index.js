@@ -7,8 +7,8 @@ class ImagePost extends React.Component {
     super(props);
     this.state = {
       titleImage: '',
-      descriptionImage: '',
-      whisperImage: ''
+      descriptionImage: ''
+      // whisperImage: ''
     };
 
     this.valueUpdater = this.valueUpdater.bind(this);
@@ -74,10 +74,10 @@ class ImagePost extends React.Component {
             <label htmlFor="description-entry">Image Description</label>
           </div>
 
-          <div className={'FormElementCheckbox'}>
+          {/* <div className={'FormElementCheckbox'}>
             <input type="checkbox" id="whisperImage" />
             <label htmlFor="whisperImage">Keep this post to myself</label>
-          </div>
+          </div> */}
 
           <Button buttonText={'Upload Image'} />
         </form>

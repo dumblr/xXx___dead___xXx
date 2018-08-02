@@ -1,7 +1,10 @@
+* {
+  box-sizing: border-box;
+}
 body {
+  font-family: sans-serif;
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
 }
 .ContentView {
   margin: 0 auto;
@@ -286,9 +289,6 @@ body {
   text-transform: uppercase;
   transition: opacity 200ms ease;
 }
-.FormElementTextArea {
-  padding-top: 15px;
-}
 .FormElementTextArea .FormElementTextArea label {
   top: 27px;
 }
@@ -303,7 +303,7 @@ body {
   width: 100%;
 }
 .FormElement {
-  margin-bottom: 20px;
+  margin-bottom: 40px;
   position: relative;
   width: 100%;
 }
@@ -335,7 +335,7 @@ body {
   left: 13px;
   position: absolute;
   text-transform: uppercase;
-  top: 12px;
+  top: 13px;
   transition: transform 200ms ease;
   user-select: none;
 }

@@ -1,10 +1,11 @@
 import React from 'react';
 
-const TextPost = props => {
+const TextPost = ({ textContent }) => {
   return (
     <div className={'TextPost'}>
-      {props.text_data.length > 0 &&
-        props.text_data.map((item, i) => (
+      <p>{textContent}</p>
+      {/* {props.textData.length > 0 &&
+        props.textData.map((item, i) => (
           <div key={i}>
             {item.html_tag === 'p' && <p>{item.content}</p>}
             {item.html_tag === 'h1' && <h1>{item.content}</h1>}
@@ -12,7 +13,7 @@ const TextPost = props => {
             {item.html_tag === 'h3' && <h3>{item.content}</h3>}
             {item.html_tag === 'h4' && <h4>{item.content}</h4>}
           </div>
-        ))}
+        ))} */}
     </div>
   );
 };
