@@ -9,11 +9,9 @@ class ContentViewContainer extends React.Component {
     this.state = {
       postDisplay: 'mine'
     };
-
-    this.togglePostDisplay = this.togglePostDisplay.bind(this);
   }
 
-  togglePostDisplay(val) {
+  togglePostDisplay = (val) => {
     this.setState({
       postDisplay: val
     });
