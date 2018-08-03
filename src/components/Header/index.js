@@ -7,13 +7,11 @@ class Header extends React.Component {
     this.state = {
       contentSelectionOpen: false
     };
-
-    this.toggleContentSelection = this.toggleContentSelection.bind(this);
   }
 
   componentDidMount() {}
 
-  toggleContentSelection() {
+  toggleContentSelection = () => {
     this.setState({
       contentSelectionOpen: !this.state.contentSelectionOpen
     });
