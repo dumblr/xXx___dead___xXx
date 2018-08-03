@@ -9,13 +9,11 @@ class ContentSelection extends React.Component {
     this.state = {
       showPostType: ''
     };
-
-    this.togglePostType = this.togglePostType.bind(this);
   }
 
   componentDidMount() {}
 
-  togglePostType(val) {
+  togglePostType = (val) => {
     this.setState({
       showPostType: val
     });
@@ -25,34 +23,26 @@ class ContentSelection extends React.Component {
     return (
       <div
         className={`
-				${'ContentSelection'}
-				${this.props.open ? 'ContentSelection__Open' : ''}
-			`}
-      >
-        <div
-          className={`
-					${'ContentSelection__Wrapper'}
-					${this.state.showPostType !== '' ? 'ContentSelection__ShowForm' : ''}
-				`}
-        >
-          <div
-            className={`
-						${'ContentSelection__Items'}
-						${this.state.showPostType !== '' ? 'ContentSelection__Items_Slim' : ''}
-					`}
-          >
-            <div
-              className={`
-								${'ContentSelection__Item'}
-								${
-                  this.state.showPostType === '' ||
-                  this.state.showPostType === 'image'
-                    ? ''
-                    : 'ContentSelection__Item_Hide'
-                }
-							`}
-              onClick={() => this.togglePostType('image')}
-            >
+	  ${'ContentSelection'}
+	  ${this.props.open ? 'ContentSelection__Open' : ''}
+	`}>
+        <div className={`
+	  ${'ContentSelection__Wrapper'}
+	  ${this.state.showPostType !== '' ? 'ContentSelection__ShowForm' : ''}
+	`}>
+          <div className={`
+	    ${'ContentSelection__Items'}
+	    ${this.state.showPostType !== '' ? 'ContentSelection__Items_Slim' : ''}
+	  `}>
+            <div className={`
+	      ${'ContentSelection__Item'}
+	      ${
+		this.state.showPostType === '' ||
+		this.state.showPostType === 'image'
+		? ''
+		: 'ContentSelection__Item_Hide'
+              }`}
+              onClick={() => this.togglePostType('image')}>
               <img
                 src="/images/icon-image.png"
                 alt="Add Visual Content Selector"
@@ -61,14 +51,13 @@ class ContentSelection extends React.Component {
             </div>
             <div
               className={`
-								${'ContentSelection__Item'}
-								${
+		${'ContentSelection__Item'}
+		${
                   this.state.showPostType === '' ||
                   this.state.showPostType === 'text'
-                    ? ''
-                    : 'ContentSelection__Item_Hide'
-                }
-							`}
+                  ? ''
+                  : 'ContentSelection__Item_Hide'
+              }					`}
               onClick={() => this.togglePostType('text')}
             >
               <img src="/images/icon-pencil.png" alt="Add Text Selector" />
@@ -78,10 +67,9 @@ class ContentSelection extends React.Component {
 
           <div
             className={`
-						${'ContentSelection__Display'}
-						${this.state.showPostType !== '' ? '' : 'ContentSelection__Display_Hide'}
-					`}
-          >
+	      ${'ContentSelection__Display'}
+	      ${this.state.showPostType !== '' ? '' : 'ContentSelection__Display_Hide'}
+	    `}>
             {this.state.showPostType === 'image' && <ImagePost />}
             {this.state.showPostType === 'text' && <TextPost />}
           </div>
