@@ -10,13 +10,9 @@ class TextPost extends React.Component {
       textContent: ''
       // whisperContent: ''
     };
-
-    this.valueUpdater = this.valueUpdater.bind(this);
-    this.createTextPost = this.createTextPost.bind(this);
-    this.makeId = this.makeId.bind(this);
   }
 
-  makeId() {
+  makeId = () => {
     var id = '';
     var vals = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
@@ -37,7 +33,7 @@ class TextPost extends React.Component {
     this.setState(newState);
   };
 
-  async createTextPost() {
+  async createTextPost = () => {
     let title = this.state.titleContent;
     let slug = title
       .toLowerCase()
