@@ -10,18 +10,15 @@ class PostContainer extends React.Component {
       postDisplay: 'mine',
       postData: {}
     };
-
-    this.togglePostDisplay = this.togglePostDisplay.bind(this);
-    //   this.getPost = this.getPost.bind(this);
   }
 
-  togglePostDisplay(val) {
+  togglePostDisplay = (val) => {
     this.setState({
       postDisplay: val
     });
   }
 
-  async getPost(archive, postId) {
+  async getPost = (archive, postId) => {
     // let myPost = await archive.readFile('/mine/posts/' + postId + '.json');
     // let post = JSON.parse(myPost);
     // this.setState({
