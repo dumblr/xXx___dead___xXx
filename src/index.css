@@ -19,9 +19,6 @@ body {
 .Post__Title {
   padding-bottom: 30px;
 }
-.Post__Content {
-  color: red;
-}
 .Header {
   background-color: rgba(255, 255, 255, 0.8);
   margin: 0 auto;

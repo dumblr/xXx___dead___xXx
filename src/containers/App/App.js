@@ -31,7 +31,6 @@ class App extends Component {
   getPosts = async archive => {
     // read directory to get all file names
     const posts = await archive.readdir('/posts');
-
     // map over all file names, add each object to an array
     posts.map(async post => {
       // read the entire file
@@ -44,28 +43,14 @@ class App extends Component {
       });
     });
   };
-  //--- TO DO: For some reason this is firing but not updating the UI...
-  refreshPosts = async archive => {
-    console.log('hmm');
-    const posts = await archive.readdir('/posts');
-    if (posts.length === 0) {
-      this.setState({
-        posts: []
-      });
-    } else {
-      const promises = posts.map(async post => {
-        const postResponse = await archive.readFile(`/posts/${post}`);
-        return JSON.parse(postResponse);
-      });
 
-      const results = await Promise.all(promises);
-      this.setState(
-        {
-          posts: results
-        },
-        console.log('hmm hmmm')
-      );
-    }
+  refreshPosts = async archive => {
+    await this.setState(
+      {
+        posts: []
+      },
+      () => this.getPosts(archive)
+    );
   };
 
   render() {
@@ -74,7 +59,7 @@ class App extends Component {
         <ContentViewContainer
           posts={this.state.posts}
           postDisplay={'mine'}
-          refreshPosts={this.refreshPosts}
+          getPosts={this.refreshPosts}
         />
       </div>
     );

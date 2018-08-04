@@ -23,7 +23,7 @@ class ContentViewContainer extends React.Component {
         <Header
           postDisplay={this.state.postDisplay}
           togglePostDisplay={this.togglePostDisplay}
-          refreshPosts={this.props.refreshPosts}
+          getPosts={this.props.getPosts}
         />
         <ContentView
           postDisplay={this.state.postDisplay}

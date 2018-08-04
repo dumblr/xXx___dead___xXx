@@ -67,18 +67,21 @@ class TextPost extends React.Component {
       fileContents(titleContent, textContent, newPostId, 'text')
     );
 
-    this.setState({
-      titleContent: '',
-      textContent: ''
-    });
-    this.props.refreshPosts(archive);
+    this.setState(
+      {
+        titleContent: '',
+        textContent: ''
+      },
+      () => this.props.getPosts(archive)
+    );
+    return this.props.toggleContentSelection();
   };
 
-  deleteLink = async postId => {
-    const archive = await new global.DatArchive(DAT_URL);
-    await archive.unlink(`/posts/${postId}.json`);
-    this.refreshPosts(archive);
-  };
+  // deleteLink = async postId => {
+  //   const archive = await new global.DatArchive(DAT_URL);
+  //   await archive.unlink(`/posts/${postId}.json`);
+  //   this.props.getPosts(archive);
+  // };
 
   render() {
     return (
@@ -86,8 +89,8 @@ class TextPost extends React.Component {
         <TextForm
           changeFn={this.fieldChange}
           submitFn={this.formSubmit}
-          linkField={this.state.titleContent}
-          textareaField={this.state.titleContent}
+          titleContent={this.state.titleContent}
+          textContent={this.state.textContent}
         />
       </div>
     );

@@ -11,7 +11,6 @@ const TextForm = ({ changeFn, submitFn, titleContent, textContent }) => (
     >
       <input
         type="text"
-        placeholder="Title"
         name="title"
         value={titleContent}
         onChange={e => changeFn(e, 'titleContent')}
@@ -25,7 +24,6 @@ const TextForm = ({ changeFn, submitFn, titleContent, textContent }) => (
     >
       <textarea
         value={textContent}
-        placeholder="Content"
         onChange={e => changeFn(e, 'textContent')}
       />
       <label htmlFor="content-entry">Content</label>

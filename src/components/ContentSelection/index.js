@@ -72,10 +72,13 @@ class ContentSelection extends React.Component {
             }`}
           >
             {this.state.showPostType === 'image' && (
-              <ImagePost refreshPosts={this.props.refreshPosts} />
+              <ImagePost getPosts={this.props.getPosts} />
             )}
             {this.state.showPostType === 'text' && (
-              <TextPost refreshPosts={this.props.refreshPosts} />
+              <TextPost
+                getPosts={this.props.getPosts}
+                toggleContentSelection={this.props.toggleContentSelection}
+              />
             )}
           </div>
         </div>

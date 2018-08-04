@@ -60,8 +60,9 @@ class Header extends React.Component {
         </div>
 
         <ContentSelection
-          refreshPosts={this.props.refreshPosts}
+          getPosts={this.props.getPosts}
           open={this.state.contentSelectionOpen}
+          toggleContentSelection={this.toggleContentSelection}
         />
       </header>
     );

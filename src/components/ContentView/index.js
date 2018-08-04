@@ -68,7 +68,6 @@ class ContentView extends React.Component {
   // }
 
   render() {
-    console.log('props contentview', this.props);
     return (
       <section className={'ContentView'}>
         {this.props.postDisplay === 'mine' && (
