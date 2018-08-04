@@ -15,7 +15,7 @@ class Header extends React.Component {
     this.setState({
       contentSelectionOpen: !this.state.contentSelectionOpen
     });
-  }
+  };
 
   render() {
     return (
@@ -59,7 +59,10 @@ class Header extends React.Component {
           </div>
         </div>
 
-        <ContentSelection open={this.state.contentSelectionOpen} />
+        <ContentSelection
+          refreshPosts={this.props.refreshPosts}
+          open={this.state.contentSelectionOpen}
+        />
       </header>
     );
   }

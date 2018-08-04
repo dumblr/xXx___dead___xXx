@@ -11,38 +11,40 @@ class ContentSelection extends React.Component {
     };
   }
 
-  componentDidMount() {}
-
-  togglePostType = (val) => {
+  togglePostType = val => {
     this.setState({
       showPostType: val
     });
-  }
+  };
 
   render() {
     return (
       <div
-        className={`
-	  ${'ContentSelection'}
-	  ${this.props.open ? 'ContentSelection__Open' : ''}
-	`}>
-        <div className={`
-	  ${'ContentSelection__Wrapper'}
-	  ${this.state.showPostType !== '' ? 'ContentSelection__ShowForm' : ''}
-	`}>
-          <div className={`
-	    ${'ContentSelection__Items'}
-	    ${this.state.showPostType !== '' ? 'ContentSelection__Items_Slim' : ''}
-	  `}>
-            <div className={`
-	      ${'ContentSelection__Item'}
-	      ${
-		this.state.showPostType === '' ||
-		this.state.showPostType === 'image'
-		? ''
-		: 'ContentSelection__Item_Hide'
+        className={`${'ContentSelection'} ${
+          this.props.open ? 'ContentSelection__Open' : ''
+        }`}
+      >
+        <div
+          className={`${'ContentSelection__Wrapper'} ${
+            this.state.showPostType !== '' ? 'ContentSelection__ShowForm' : ''
+          }`}
+        >
+          <div
+            className={`${'ContentSelection__Items'} ${
+              this.state.showPostType !== ''
+                ? 'ContentSelection__Items_Slim'
+                : ''
+            }`}
+          >
+            <div
+              className={`${'ContentSelection__Item'} ${
+                this.state.showPostType === '' ||
+                this.state.showPostType === 'image'
+                  ? ''
+                  : 'ContentSelection__Item_Hide'
               }`}
-              onClick={() => this.togglePostType('image')}>
+              onClick={() => this.togglePostType('image')}
+            >
               <img
                 src="/images/icon-image.png"
                 alt="Add Visual Content Selector"
@@ -50,28 +52,31 @@ class ContentSelection extends React.Component {
               <p>Image</p>
             </div>
             <div
-              className={`
-		${'ContentSelection__Item'}
-		${
-                  this.state.showPostType === '' ||
-                  this.state.showPostType === 'text'
+              className={`${'ContentSelection__Item'} ${
+                this.state.showPostType === '' ||
+                this.state.showPostType === 'text'
                   ? ''
                   : 'ContentSelection__Item_Hide'
-              }					`}
+              }`}
               onClick={() => this.togglePostType('text')}
             >
               <img src="/images/icon-pencil.png" alt="Add Text Selector" />
               <p>Text</p>
             </div>
           </div>
-
           <div
-            className={`
-	      ${'ContentSelection__Display'}
-	      ${this.state.showPostType !== '' ? '' : 'ContentSelection__Display_Hide'}
-	    `}>
-            {this.state.showPostType === 'image' && <ImagePost />}
-            {this.state.showPostType === 'text' && <TextPost />}
+            className={`${'ContentSelection__Display'} ${
+              this.state.showPostType !== ''
+                ? ''
+                : 'ContentSelection__Display_Hide'
+            }`}
+          >
+            {this.state.showPostType === 'image' && (
+              <ImagePost refreshPosts={this.props.refreshPosts} />
+            )}
+            {this.state.showPostType === 'text' && (
+              <TextPost refreshPosts={this.props.refreshPosts} />
+            )}
           </div>
         </div>
       </div>

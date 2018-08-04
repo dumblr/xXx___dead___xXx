@@ -14,8 +14,19 @@ class App extends Component {
 
   async componentDidMount() {
     const archive = await new global.DatArchive(DAT_URL);
+    const archiveInfo = await archive.getInfo();
+
+    this.setInfo(archiveInfo);
     this.getPosts(archive);
   }
+
+  setInfo = archiveInfo => {
+    this.setState({
+      ...(archiveInfo.isOwner && { isOwner: true }),
+      listTitle: archiveInfo.title,
+      listDescription: archiveInfo.description
+    });
+  };
 
   getPosts = async archive => {
     // read directory to get all file names
@@ -33,12 +44,38 @@ class App extends Component {
       });
     });
   };
+  //--- TO DO: For some reason this is firing but not updating the UI...
+  refreshPosts = async archive => {
+    console.log('hmm');
+    const posts = await archive.readdir('/posts');
+    if (posts.length === 0) {
+      this.setState({
+        posts: []
+      });
+    } else {
+      const promises = posts.map(async post => {
+        const postResponse = await archive.readFile(`/posts/${post}`);
+        return JSON.parse(postResponse);
+      });
+
+      const results = await Promise.all(promises);
+      this.setState(
+        {
+          posts: results
+        },
+        console.log('hmm hmmm')
+      );
+    }
+  };
 
   render() {
-    console.log('app', this.state.posts);
     return (
       <div>
-        <ContentViewContainer posts={this.state.posts} postDisplay={'mine'} />
+        <ContentViewContainer
+          posts={this.state.posts}
+          postDisplay={'mine'}
+          refreshPosts={this.refreshPosts}
+        />
       </div>
     );
   }

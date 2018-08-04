@@ -11,8 +11,6 @@ const ContentItem = ({ vals }) => {
   let Day = DateItem.getDate();
   let MonthWord;
 
-  console.log('item', vals);
-
   switch (true) {
     case Month === 0:
       MonthWord = 'January';
