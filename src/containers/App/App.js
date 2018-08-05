@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import ContentViewContainer from '../ContentViewContainer';
 import urlEnv from '../../utils/urlEnv';
+import PostContainer from '../PostContainer/index';
 
 class App extends Component {
   constructor(props) {
@@ -71,16 +73,28 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        <ContentViewContainer
-          contentSelectionOpen={this.state.contentSelectionOpen}
-          toggleContentSelection={this.toggleContentSelection}
-          postDisplay={this.state.postDisplay}
-          posts={this.state.posts}
-          getPosts={this.refreshPosts}
-          togglePostDisplayFn={this.togglePostDisplay}
-        />
-      </div>
+      <Router>
+        <div>
+          <Route
+            exact
+            path="/"
+            render={() => (
+              <ContentViewContainer
+                contentSelectionOpen={this.state.contentSelectionOpen}
+                toggleContentSelection={this.toggleContentSelection}
+                postDisplay={this.state.postDisplay}
+                posts={this.state.posts}
+                getPosts={this.refreshPosts}
+                togglePostDisplayFn={this.togglePostDisplay}
+              />
+            )}
+          />
+          <Route
+            path="/post/:postId"
+            render={props => <PostContainer {...props} />}
+          />
+        </div>
+      </Router>
     );
   }
 }

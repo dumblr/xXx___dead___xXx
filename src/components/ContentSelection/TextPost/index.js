@@ -44,7 +44,6 @@ class TextPost extends React.Component {
 
   // await archive.writeFile('/mine/posts/' + id + '.json', outputJson);
   // }
-
   async componentDidMount() {}
 
   fieldChange = (e, str) => {
