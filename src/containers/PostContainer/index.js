@@ -26,6 +26,7 @@ class PostContainer extends React.Component {
   getPost = async (postId, archive) => {
     const myPost = await archive.readFile('/posts/' + postId + '.json');
     const post = JSON.parse(myPost);
+    console.log(post);
     this.setState({
       postData: post
     });
@@ -35,8 +36,11 @@ class PostContainer extends React.Component {
     return (
       <div className="App">
         <Header
+          contentSelectionOpen={this.props.contentSelectionOpen}
+          toggleContentSelection={this.props.toggleContentSelection}
+          togglePostDisplay={this.props.togglePostDisplayFn}
+          getPosts={this.props.getPosts}
           postDisplay={this.state.postDisplay}
-          togglePostDisplay={this.togglePostDisplay}
         />
         <Post post={this.state.postData} />
       </div>

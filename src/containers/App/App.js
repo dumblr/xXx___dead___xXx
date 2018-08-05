@@ -91,7 +91,15 @@ class App extends Component {
           />
           <Route
             path="/post/:postId"
-            render={props => <PostContainer {...props} />}
+            render={props => (
+              <PostContainer
+                contentSelectionOpen={this.state.contentSelectionOpen}
+                toggleContentSelection={this.toggleContentSelection}
+                togglePostDisplayFn={this.togglePostDisplay}
+                getPosts={this.refreshPosts}
+                {...props}
+              />
+            )}
           />
         </div>
       </Router>
