@@ -45,6 +45,15 @@ class App extends Component {
     });
   };
 
+  refreshPosts = async archive => {
+    await this.setState(
+      {
+        posts: []
+      },
+      () => this.getPosts(archive)
+    );
+  };
+
   render() {
     return (
       <Router>

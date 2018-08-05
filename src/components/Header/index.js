@@ -58,7 +58,6 @@ class Header extends React.Component {
             </a>
           </div>
         </div>
-
         <ContentSelection
           getPosts={this.props.getPosts}
           open={this.state.contentSelectionOpen}

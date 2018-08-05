@@ -14,7 +14,6 @@ class TextPost extends React.Component {
       // whisperContent: ''
     };
   }
-
   // createTextPost = () => {
   //   let title = this.state.titleContent;
   //   let slug = title
@@ -45,7 +44,6 @@ class TextPost extends React.Component {
 
   // await archive.writeFile('/mine/posts/' + id + '.json', outputJson);
   // }
-
   async componentDidMount() {}
 
   fieldChange = (e, str) => {
@@ -67,12 +65,12 @@ class TextPost extends React.Component {
       fileContents(titleContent, textContent, newPostId, 'text')
     );
 
-    await this.setState(
+    this.setState(
       {
         titleContent: '',
         textContent: ''
       },
-      await this.props.getPosts(archive)
+      () => this.props.getPosts(archive)
     );
     return this.props.toggleContentSelection();
   };
