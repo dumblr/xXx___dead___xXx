@@ -65,14 +65,13 @@ class TextPost extends React.Component {
       fileContents(titleContent, textContent, newPostId, 'text')
     );
 
-    this.setState(
-      {
-        titleContent: '',
-        textContent: ''
-      },
-      () => this.props.getPosts(archive)
-    );
-    return this.props.toggleContentSelection();
+    this.setState({
+      titleContent: '',
+      textContent: ''
+    });
+
+    this.props.getPosts(archive);
+    this.props.toggleContentSelection();
   };
 
   // deleteLink = async postId => {

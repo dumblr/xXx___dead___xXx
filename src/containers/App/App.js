@@ -1,24 +1,30 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { DAT_URL } from './../../config';
 
 import ContentViewContainer from '../ContentViewContainer';
-import PostContainer from '../PostContainer';
+import urlEnv from '../../utils/urlEnv';
+import PostContainer from '../PostContainer/index';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      posts: []
+      posts: [],
+      postDisplay: 'mine',
+      contentSelectionOpen: false
     };
   }
 
   async componentDidMount() {
-    const archive = await new global.DatArchive(DAT_URL);
-    const archiveInfo = await archive.getInfo();
-
-    this.setInfo(archiveInfo);
-    this.getPosts(archive);
+    try {
+      const archive = await new global.DatArchive(urlEnv());
+      const archiveInfo = await archive.getInfo();
+      this.refreshPosts(archive);
+      this.setInfo(archiveInfo);
+      console.log('success');
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   setInfo = archiveInfo => {
@@ -29,29 +35,40 @@ class App extends Component {
     });
   };
 
-  getPosts = async archive => {
-    // read directory to get all file names
+  refreshPosts = async archive => {
     const posts = await archive.readdir('/posts');
-    // map over all file names, add each object to an array
-    posts.map(async post => {
-      // read the entire file
-      const postItem = await archive.readFile(`/posts/${post}`);
-      // get state for posts and push into state
-      let myPosts = this.state.posts;
-      myPosts.push(JSON.parse(postItem));
+    if (posts.length === 0) {
       this.setState({
-        posts: myPosts
+        posts: []
       });
+    } else {
+      const promises = posts.map(async post => {
+        const postResponse = await archive.readFile(`/posts/${post}`);
+        return JSON.parse(postResponse);
+      });
+      const results = await Promise.all(promises);
+      this.setState({
+        posts: results
+      });
+    }
+  };
+
+  toggleContentSelection = () => {
+    this.setState(prevState => {
+      return {
+        ...prevState,
+        contentSelectionOpen: !prevState.contentSelectionOpen
+      };
     });
   };
 
-  refreshPosts = async archive => {
-    await this.setState(
-      {
-        posts: []
-      },
-      () => this.getPosts(archive)
-    );
+  togglePostDisplay = val => {
+    this.setState(prevState => {
+      return {
+        ...prevState,
+        postDisplay: val
+      };
+    });
   };
 
   render() {
@@ -63,9 +80,12 @@ class App extends Component {
             path="/"
             render={() => (
               <ContentViewContainer
+                contentSelectionOpen={this.state.contentSelectionOpen}
+                toggleContentSelection={this.toggleContentSelection}
+                postDisplay={this.state.postDisplay}
                 posts={this.state.posts}
-                postDisplay={'mine'}
-                getPosts={this.getPosts}
+                getPosts={this.refreshPosts}
+                togglePostDisplayFn={this.togglePostDisplay}
               />
             )}
           />
