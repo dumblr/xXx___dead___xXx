@@ -11,11 +11,11 @@ class ContentViewContainer extends React.Component {
     };
   }
 
-  togglePostDisplay = (val) => {
+  togglePostDisplay = val => {
     this.setState({
       postDisplay: val
     });
-  }
+  };
 
   render() {
     return (
@@ -23,6 +23,7 @@ class ContentViewContainer extends React.Component {
         <Header
           postDisplay={this.state.postDisplay}
           togglePostDisplay={this.togglePostDisplay}
+          getPosts={this.props.getPosts}
         />
         <ContentView
           postDisplay={this.state.postDisplay}
