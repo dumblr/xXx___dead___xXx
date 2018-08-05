@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { DAT_URL } from './../../config';
 import Header from '../../components/Header';
 import Post from '../../components/Post';
 
@@ -12,24 +12,24 @@ class PostContainer extends React.Component {
     };
   }
 
-  togglePostDisplay = (val) => {
+  async componentDidMount() {
+    const archive = await new global.DatArchive(DAT_URL);
+    this.getPost(this.props.match.params.postId, archive);
+  }
+
+  togglePostDisplay = val => {
     this.setState({
       postDisplay: val
     });
-  }
+  };
 
-  async getPost = (archive, postId) => {
-    // let myPost = await archive.readFile('/mine/posts/' + postId + '.json');
-    // let post = JSON.parse(myPost);
-    // this.setState({
-    //   postData: post
-    // });
-  }
-
-  componentDidMount() {
-    const archive = this.props.data;
-    this.getPost(archive, this.props.match.params.postId);
-  }
+  getPost = async (postId, archive) => {
+    const myPost = await archive.readFile('/posts/' + postId + '.json');
+    const post = JSON.parse(myPost);
+    this.setState({
+      postData: post
+    });
+  };
 
   render() {
     return (
@@ -38,7 +38,7 @@ class PostContainer extends React.Component {
           postDisplay={this.state.postDisplay}
           togglePostDisplay={this.togglePostDisplay}
         />
-        <Post data={this.props.postData} />
+        <Post post={this.state.postData} />
       </div>
     );
   }

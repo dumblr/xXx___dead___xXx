@@ -1,10 +1,10 @@
 import React from 'react';
 import ContentItem from '../../components/ContentView/ContentItem';
 
-const Post = ({ data }) => {
+const Post = ({ post }) => {
   return (
     <div className={`Post`}>
-      <ContentItem vals={data} />
+      <ContentItem vals={post} />
     </div>
   );
 };

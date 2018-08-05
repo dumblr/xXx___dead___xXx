@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { DAT_URL } from './../../config';
 
 import ContentViewContainer from '../ContentViewContainer';
-// import PostContainer from '../PostContainer';
+import PostContainer from '../PostContainer';
 
 class App extends Component {
   constructor(props) {
@@ -44,24 +45,27 @@ class App extends Component {
     });
   };
 
-  refreshPosts = async archive => {
-    await this.setState(
-      {
-        posts: []
-      },
-      () => this.getPosts(archive)
-    );
-  };
-
   render() {
     return (
-      <div>
-        <ContentViewContainer
-          posts={this.state.posts}
-          postDisplay={'mine'}
-          getPosts={this.refreshPosts}
-        />
-      </div>
+      <Router>
+        <div>
+          <Route
+            exact
+            path="/"
+            render={() => (
+              <ContentViewContainer
+                posts={this.state.posts}
+                postDisplay={'mine'}
+                getPosts={this.getPosts}
+              />
+            )}
+          />
+          <Route
+            path="/post/:postId"
+            render={props => <PostContainer {...props} />}
+          />
+        </div>
+      </Router>
     );
   }
 }

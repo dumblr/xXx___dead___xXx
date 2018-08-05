@@ -67,12 +67,12 @@ class TextPost extends React.Component {
       fileContents(titleContent, textContent, newPostId, 'text')
     );
 
-    this.setState(
+    await this.setState(
       {
         titleContent: '',
         textContent: ''
       },
-      () => this.props.getPosts(archive)
+      await this.props.getPosts(archive)
     );
     return this.props.toggleContentSelection();
   };
