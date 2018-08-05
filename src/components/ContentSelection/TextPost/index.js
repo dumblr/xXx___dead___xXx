@@ -14,7 +14,6 @@ class TextPost extends React.Component {
       // whisperContent: ''
     };
   }
-
   // createTextPost = () => {
   //   let title = this.state.titleContent;
   //   let slug = title
