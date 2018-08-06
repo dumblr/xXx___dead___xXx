@@ -1,7 +1,7 @@
 const fileContents = (postTitle, postText, postIdStr, postType) => `{
   "postId": "${postIdStr}",
   "titleContent": "${postTitle}",
-  "textContent": "${postText}",
+  "textContent": ${postText},
   "createdAt": "${new Date()}",
   "postType": "${postType}"
 }`;
