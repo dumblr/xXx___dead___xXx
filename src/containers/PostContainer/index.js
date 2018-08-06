@@ -35,8 +35,11 @@ class PostContainer extends React.Component {
     return (
       <div className="App">
         <Header
+          contentSelectionOpen={this.props.contentSelectionOpen}
+          toggleContentSelection={this.props.toggleContentSelection}
+          togglePostDisplay={this.props.togglePostDisplayFn}
+          getPosts={this.props.getPosts}
           postDisplay={this.state.postDisplay}
-          togglePostDisplay={this.togglePostDisplay}
         />
         <Post post={this.state.postData} />
       </div>

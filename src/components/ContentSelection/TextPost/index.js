@@ -62,7 +62,7 @@ class TextPost extends React.Component {
     const archive = await new global.DatArchive(DAT_URL);
     await archive.writeFile(
       `/posts/${newPostId}.json`,
-      fileContents(titleContent, textContent, newPostId, 'text')
+      fileContents(titleContent, JSON.stringify(textContent), newPostId, 'text')
     );
 
     this.setState({
