@@ -26,7 +26,6 @@ class PostContainer extends React.Component {
   getPost = async (postId, archive) => {
     const myPost = await archive.readFile('/posts/' + postId + '.json');
     const post = JSON.parse(myPost);
-    console.log(post);
     this.setState({
       postData: post
     });

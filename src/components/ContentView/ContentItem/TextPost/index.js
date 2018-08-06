@@ -7,7 +7,6 @@ import DeadLink from '../../../DeadLink/index';
 const TextPost = ({ textContent }) => {
   return (
     <div className={'TextPost'}>
-      {console.log(textContent)}
       {
         remark()
           .use(reactRenderer, {
