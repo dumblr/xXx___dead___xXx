@@ -40,6 +40,7 @@ class PostContainer extends React.Component {
           togglePostDisplay={this.props.togglePostDisplayFn}
           getPosts={this.props.getPosts}
           postDisplay={this.state.postDisplay}
+          hideMineToggle={true}
         />
         <Post post={this.state.postData} />
       </div>

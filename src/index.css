@@ -34,6 +34,22 @@ body {
   position: relative;
   z-index: 4;
 }
+.HomeArrow {
+  transform: translateX(0px);
+  transition: transform 200ms ease;
+}
+.HomeArrow img {
+  cursor: pointer;
+  height: auto;
+  transform: rotate(-90deg);
+  width: 40px;
+}
+.HomeArrow:hover {
+  transform: translateX(-6px);
+}
+.HomeArrow--Hide {
+  display: none;
+}
 .ContentToggle {
   cursor: pointer;
   display: inline-block;
@@ -51,6 +67,9 @@ body {
 .ContentDisplayToggle img {
   height: auto;
   width: 40px;
+}
+.ContentDisplayToggle--Hide {
+  display: none;
 }
 .ContentDisplayToggle__Item {
   cursor: pointer;
@@ -389,4 +408,12 @@ body {
 .Box label {
   color: #ccc;
   margin-top: 15px;
+}
+.BrowserDetection {
+  margin: 0 auto;
+  max-width: 500px;
+  padding: 150px 20px;
+}
+.BrowserDetection a {
+  color: red;
 }

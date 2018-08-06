@@ -6,7 +6,8 @@ const Header = ({
   contentSelectionOpen,
   postDisplay,
   togglePostDisplay,
-  toggleContentSelection
+  toggleContentSelection,
+  hideMineToggle
 }) => (
   <header className={`Header`}>
     <div className={`Header__Nav`}>
@@ -18,7 +19,11 @@ const Header = ({
       >
         <img src="/images/icon-plus.svg" alt="plus icon" />
       </a>
-      <div className={'ContentDisplayToggle'}>
+      <div
+        className={`ContentDisplayToggle ${
+          hideMineToggle ? 'ContentDisplayToggle--Hide' : ''
+        }`}
+      >
         <a
           className={`
           ${'ContentDisplayToggle__Item'} 
@@ -42,6 +47,12 @@ const Header = ({
           <img src="/images/icon-group.svg" alt="show their posts" />
         </a>
       </div>
+      <a
+        href="/"
+        className={`HomeArrow ${!hideMineToggle ? 'HomeArrow--Hide' : ''}`}
+      >
+        <img src="/images/icon-arrow.svg" alt="return home arrow" />
+      </a>
     </div>
 
     <ContentSelection
