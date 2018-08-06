@@ -11,11 +11,17 @@ class App extends Component {
     this.state = {
       posts: [],
       postDisplay: 'mine',
-      contentSelectionOpen: false
+      contentSelectionOpen: false,
+      correctBrowser: false
     };
   }
 
   async componentDidMount() {
+    if (navigator.userAgent.indexOf('BeakerBrowser') !== -1) {
+      this.setState({
+        correctBrowser: true
+      });
+    }
     try {
       const archive = await new global.DatArchive(urlEnv());
       const archiveInfo = await archive.getInfo();
@@ -86,6 +92,7 @@ class App extends Component {
                 posts={this.state.posts}
                 getPosts={this.refreshPosts}
                 togglePostDisplayFn={this.togglePostDisplay}
+                correctBrowser={this.state.correctBrowser}
               />
             )}
           />

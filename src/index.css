@@ -409,3 +409,11 @@ body {
   color: #ccc;
   margin-top: 15px;
 }
+.BrowserDetection {
+  margin: 0 auto;
+  max-width: 500px;
+  padding: 150px 20px;
+}
+.BrowserDetection a {
+  color: red;
+}
