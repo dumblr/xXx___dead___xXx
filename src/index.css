@@ -329,12 +329,17 @@ body {
   background: rgba(255, 255, 255, 0.8);
   border: 1px solid #e5e5e5;
   border-radius: 2px;
-  font-size: 18px;
   outline: none;
-  padding: 10px;
+  padding: 10px 20px;
   position: relative;
   width: 100%;
   z-index: 3;
+}
+.FormElement input[type='text'] {
+  font-size: 16px;
+}
+.FormElement textarea {
+  font-size: 12px;
 }
 .FormElement input[type='text']:focus,
 .FormElement textarea:focus {
@@ -416,4 +421,29 @@ body {
 }
 .BrowserDetection a {
   color: red;
+}
+
+.TextPost h1 {
+  font-size: 30px;
+  font-weight: bold;
+}
+.TextPost h2 {
+  font-size: 24px;
+  font-weight: bold;
+  text-transform: none;
+}
+.TextPost h3 {
+  font-size: 20px;
+  font-weight: bold;
+}
+.TextPost h4 {
+  font-size: 16px;
+  font-weight: bold;
+}
+.TextPost h5 {
+  font-size: 14px;
+  font-weight: bold;
+}
+.TextPost p {
+  font-size: 14px;
 }
