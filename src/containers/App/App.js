@@ -78,6 +78,12 @@ class App extends Component {
     });
   };
 
+  deletePost = async postId => {
+    const archive = await new global.DatArchive(urlEnv());
+    await archive.unlink(`/posts/${postId}.json`);
+    this.refreshPosts(archive);
+  };
+
   render() {
     const sortedPosts = sortBy(this.state.posts, ['createdAt']).reverse();
     return (
@@ -95,6 +101,7 @@ class App extends Component {
                 getPosts={this.refreshPosts}
                 togglePostDisplayFn={this.togglePostDisplay}
                 correctBrowser={this.state.correctBrowser}
+                deletePost={this.deletePost}
               />
             )}
           />

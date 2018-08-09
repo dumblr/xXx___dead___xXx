@@ -2,8 +2,9 @@ import React from 'react';
 
 import TextPost from './TextPost';
 import ImagePost from './ImagePost';
+import Trash from '../../SharedComponents/Icons/Trash';
 
-const ContentItem = ({ vals }) => {
+const ContentItem = ({ vals, deletePost }) => {
   let DateItem = new Date(vals.createdAt);
   let Minutes = (DateItem.getMinutes() < 10 ? '0' : '') + DateItem.getMinutes();
   let Time = DateItem.getHours() + `:` + Minutes;
@@ -74,6 +75,11 @@ const ContentItem = ({ vals }) => {
         {vals.type === 'image' && (
           <ImagePost source={vals.asset_ref} altText={vals.asset_description} />
         )}
+        <div className="ContentItem__Delete">
+          <a onClick={() => deletePost(vals.postId)}>
+            <Trash />
+          </a>
+        </div>
       </div>
     </div>
   );

@@ -118,6 +118,22 @@ h5 {
   font-size: 20px;
   text-decoration: none;
 }
+.ContentItem__Delete {
+  padding: 10px 0;
+}
+.ContentItem__Delete a {
+  cursor: pointer;
+  padding: 5px;
+}
+.ContentItem__Delete a svg {
+  fill: #a9a9a9;
+  height: 24px;
+  transition: fill 200ms ease;
+  width: 24px;
+}
+.ContentItem__Delete a:hover svg {
+  fill: red;
+}
 .Button {
   background-color: #000;
   border: 1px solid #000;
@@ -336,7 +352,7 @@ h5 {
   border: 1px solid #e5e5e5;
   border-radius: 2px;
   outline: none;
-  padding: 10px 20px;
+  padding: 12px;
   position: relative;
   width: 100%;
   z-index: 3;
