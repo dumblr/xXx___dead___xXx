@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import sortBy from 'lodash.sortby';
 
 import ContentViewContainer from '../ContentViewContainer';
 import urlEnv from '../../utils/urlEnv';
@@ -78,6 +79,7 @@ class App extends Component {
   };
 
   render() {
+    const sortedPosts = sortBy(this.state.posts, ['createdAt']).reverse();
     return (
       <Router>
         <div>
@@ -89,7 +91,7 @@ class App extends Component {
                 contentSelectionOpen={this.state.contentSelectionOpen}
                 toggleContentSelection={this.toggleContentSelection}
                 postDisplay={this.state.postDisplay}
-                posts={this.state.posts}
+                posts={sortedPosts}
                 getPosts={this.refreshPosts}
                 togglePostDisplayFn={this.togglePostDisplay}
                 correctBrowser={this.state.correctBrowser}
