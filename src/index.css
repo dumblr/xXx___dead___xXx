@@ -9,7 +9,7 @@ body {
 .ContentView {
   margin: 0 auto;
   max-width: 1040px;
-  padding-top: 100px;
+  padding: 100px 20px 60px 20px;
 }
 .Post {
   margin: 0 auto;
@@ -87,13 +87,18 @@ body {
 .ContentItem {
   display: grid;
   grid-auto-rows: minmax(0px, auto);
-  grid-column-gap: 60px;
+  grid-column-gap: 40px;
   grid-row-gap: 20px;
   grid-template-columns: 45px auto;
   padding-bottom: 60px;
 }
-.ContentItem p {
-  max-width: 540px;
+.ContentItem p,
+h1,
+h2,
+h3,
+h4,
+h5 {
+  max-width: 560px;
 }
 .ContentItem__Date p {
   font-size: 12px;
@@ -110,6 +115,7 @@ body {
 }
 .ContentItem__View h3 a {
   color: #000;
+  font-size: 20px;
   text-decoration: none;
 }
 .Button {
