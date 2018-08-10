@@ -2,9 +2,17 @@
 
 ![wot](./yea.jpg)
 
-_Wot?_
+## What is _dead_?
 
-### Development
+_Dead_ is a blogging/tumblog/content manufacturing device built using [dat] and running on [beaker browser]. Have you heard of tumblr before? Then you get it.
+
+The key difference, though, is that by running on the dat protocol, _dead_ enables each individual to create their own instance of _dead_ and to publish their own content on their own computer and share to other people who have their own _dead_ instances. This means the data lives on your computer and doesn't *require* any server space. 
+
+We will have more info as the project progresses about features and hot tips on how to make _dead_ more personalized. 
+
+## Development
+
+_dead_ is still heavily in development, but we encourage people to jump on and give it a try. Feeling really ambitious? Jump in the code base and give us a good ole' PR. _dead_ will never make any of us a dime so, like, the free labor probably won't be that exploited. 
 
 1.  Clone the repo.
 2.  Install dependencies

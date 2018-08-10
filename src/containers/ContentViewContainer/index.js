@@ -11,7 +11,8 @@ const ContentViewContainer = ({
   toggleContentSelection,
   posts,
   contentSelectionOpen,
-  correctBrowser
+  correctBrowser,
+  deletePost
 }) => (
   <div className="App">
     <Header
@@ -22,7 +23,11 @@ const ContentViewContainer = ({
       toggleContentSelection={toggleContentSelection}
     />
     {!correctBrowser && <BrowserDetection />}
-    <ContentView postDisplay={postDisplay} posts={posts} />
+    <ContentView
+      deletePost={deletePost}
+      postDisplay={postDisplay}
+      posts={posts}
+    />
   </div>
 );
 

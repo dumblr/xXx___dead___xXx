@@ -9,7 +9,7 @@ body {
 .ContentView {
   margin: 0 auto;
   max-width: 1040px;
-  padding-top: 100px;
+  padding: 100px 20px 60px 20px;
 }
 .Post {
   margin: 0 auto;
@@ -87,13 +87,18 @@ body {
 .ContentItem {
   display: grid;
   grid-auto-rows: minmax(0px, auto);
-  grid-column-gap: 60px;
+  grid-column-gap: 40px;
   grid-row-gap: 20px;
   grid-template-columns: 45px auto;
   padding-bottom: 60px;
 }
-.ContentItem p {
-  max-width: 540px;
+.ContentItem p,
+h1,
+h2,
+h3,
+h4,
+h5 {
+  max-width: 560px;
 }
 .ContentItem__Date p {
   font-size: 12px;
@@ -110,7 +115,24 @@ body {
 }
 .ContentItem__View h3 a {
   color: #000;
+  font-size: 20px;
   text-decoration: none;
+}
+.ContentItem__Delete {
+  padding: 10px 0;
+}
+.ContentItem__Delete a {
+  cursor: pointer;
+  padding: 5px;
+}
+.ContentItem__Delete a svg {
+  fill: #a9a9a9;
+  height: 24px;
+  transition: fill 200ms ease;
+  width: 24px;
+}
+.ContentItem__Delete a:hover svg {
+  fill: red;
 }
 .Button {
   background-color: #000;
@@ -329,12 +351,17 @@ body {
   background: rgba(255, 255, 255, 0.8);
   border: 1px solid #e5e5e5;
   border-radius: 2px;
-  font-size: 18px;
   outline: none;
-  padding: 10px;
+  padding: 12px;
   position: relative;
   width: 100%;
   z-index: 3;
+}
+.FormElement input[type='text'] {
+  font-size: 16px;
+}
+.FormElement textarea {
+  font-size: 12px;
 }
 .FormElement input[type='text']:focus,
 .FormElement textarea:focus {
@@ -416,4 +443,29 @@ body {
 }
 .BrowserDetection a {
   color: red;
+}
+
+.TextPost h1 {
+  font-size: 30px;
+  font-weight: bold;
+}
+.TextPost h2 {
+  font-size: 24px;
+  font-weight: bold;
+  text-transform: none;
+}
+.TextPost h3 {
+  font-size: 20px;
+  font-weight: bold;
+}
+.TextPost h4 {
+  font-size: 16px;
+  font-weight: bold;
+}
+.TextPost h5 {
+  font-size: 14px;
+  font-weight: bold;
+}
+.TextPost p {
+  font-size: 14px;
 }

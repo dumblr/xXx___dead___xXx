@@ -2,10 +2,14 @@ import React from 'react';
 
 import ContentViewLoop from './ContentViewLoop';
 
-const ContentView = ({ posts, postDisplay }) => (
+const ContentView = ({ posts, postDisplay, deletePost }) => (
   <section className={'ContentView'}>
-    {postDisplay === 'mine' && <ContentViewLoop posts={posts} />}
-    {postDisplay === 'theirs' && <ContentViewLoop posts={posts} />}
+    {postDisplay === 'mine' && (
+      <ContentViewLoop deletePost={deletePost} posts={posts} />
+    )}
+    {postDisplay === 'theirs' && (
+      <ContentViewLoop deletePost={deletePost} posts={posts} />
+    )}
   </section>
 );
 
