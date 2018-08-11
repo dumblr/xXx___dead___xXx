@@ -26,6 +26,7 @@ body {
   padding: 18px 20px;
   position: fixed;
   width: 100%;
+  z-index: 3;
 }
 .Header__Nav {
   display: flex;
@@ -59,14 +60,14 @@ body {
 }
 .ContentToggle img {
   height: auto;
-  width: 40px;
+  width: 30px;
 }
 .ContentToggle_Open {
   transform: rotate(45deg);
 }
 .ContentDisplayToggle img {
   height: auto;
-  width: 40px;
+  width: 30px;
 }
 .ContentDisplayToggle--Hide {
   display: none;
@@ -92,13 +93,20 @@ body {
   grid-template-columns: 45px auto;
   padding-bottom: 60px;
 }
+.ContentItem__Title {
+  margin-bottom: 30px;
+  font-weight: bolder;
+}
 .ContentItem p,
 h1,
 h2,
 h3,
 h4,
 h5 {
+  margin: 0;
+  margin-bottom: 20px;
   max-width: 560px;
+  padding: 0;
 }
 .ContentItem__Date p {
   font-size: 12px;
@@ -106,6 +114,11 @@ h5 {
   line-height: 14px;
   text-transform: uppercase;
   text-align: right;
+}
+.ContentItem__View {
+  max-width: 600px;
+  position: relative;
+  z-index: 1;
 }
 .ContentItem__View h2 {
   font-size: 12px;
@@ -145,9 +158,16 @@ h5 {
   padding: 6px 20px;
   transition: background-color 200ms ease, color 200ms ease;
 }
+.Button--White {
+  background-color: #fff;
+  color: #000;
+}
 .Button:hover {
   background-color: #fff;
   color: #000;
+}
+.Button--White:hover {
+  background-color: #ccc;
 }
 .ImagePost img {
   max-width: 100%;
@@ -447,25 +467,91 @@ h5 {
 
 .TextPost h1 {
   font-size: 30px;
-  font-weight: bold;
+  font-weight: normal;
 }
 .TextPost h2 {
   font-size: 24px;
-  font-weight: bold;
+  font-weight: normal;
   text-transform: none;
 }
 .TextPost h3 {
   font-size: 20px;
-  font-weight: bold;
+  font-weight: normal;
 }
 .TextPost h4 {
   font-size: 16px;
-  font-weight: bold;
+  font-weight: normal;
 }
 .TextPost h5 {
   font-size: 14px;
-  font-weight: bold;
+  font-weight: normal;
 }
 .TextPost p {
   font-size: 14px;
+  line-height: 21px;
+}
+.TextPost a {
+  color: black;
+  font-weight: 900;
+}
+.EditMenu {
+  display: inline;
+  position: absolute;
+  right: 0;
+}
+.EditMenu__Drawer__Item {
+  cursor: pointer;
+  padding: 10px 4px;
+}
+.EditMenu__Drawer {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  text-align: center;
+  transition: max-height 200ms ease, opacity 200ms ease;
+}
+.EditMenu__Drawer--Open {
+  max-height: 200px;
+  opacity: 1;
+}
+.EditMenu__Toggle svg {
+  cursor: pointer;
+  height: auto;
+  width: 30px;
+}
+.DeleteModal {
+  background-color: rgba(255, 255, 255, 0.4);
+  height: 100vh;
+  left: 0;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  transition: opacity 400ms ease, max-height 400ms ease;
+  width: 100vw;
+  z-index: 5;
+}
+.DeleteModal__Container {
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.7);
+  border: 1px solid black;
+  display: none;
+  flex-direction: row;
+  justify-content: space-between;
+  left: 0;
+  margin: 5% auto;
+  padding: 5px 30px;
+  position: absolute;
+  right: 0;
+  top: 200px;
+  width: 400px;
+  z-index: 6;
+}
+.DeleteModal__Show {
+  max-height: 100%;
+  opacity: 1;
+}
+.DeleteModal__Show .DeleteModal__Container {
+  display: flex;
 }

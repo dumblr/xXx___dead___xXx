@@ -17,22 +17,13 @@ const Header = ({
         }`}
         onClick={() => toggleContentSelection()}
       >
-        <img src="/images/icon-plus.svg" alt="plus icon" />
+        <img src="/icons/icon-plus.svg" alt="plus icon" />
       </a>
       <div
         className={`ContentDisplayToggle ${
           hideMineToggle ? 'ContentDisplayToggle--Hide' : ''
         }`}
       >
-        <a
-          className={`
-          ${'ContentDisplayToggle__Item'} 
-          ${postDisplay === 'mine' ? 'ContentDisplayToggle__Item_Selected' : ''}
-        `}
-          onClick={() => togglePostDisplay('mine')}
-        >
-          <img src="/images/icon-smile.svg" alt="show my posts" />
-        </a>
         <a
           className={`
           ${'ContentDisplayToggle__Item'} 
@@ -44,14 +35,36 @@ const Header = ({
         `}
           onClick={() => togglePostDisplay('theirs')}
         >
-          <img src="/images/icon-group.svg" alt="show their posts" />
+          <img src="/icons/icon-group.svg" alt="show their posts" />
+        </a>
+        <a
+          className={`
+          ${'ContentDisplayToggle__Item'} 
+          ${postDisplay === 'mine' ? 'ContentDisplayToggle__Item_Selected' : ''}
+        `}
+          onClick={() => togglePostDisplay('mine')}
+        >
+          <img src="/icons/icon-smile.svg" alt="show my posts" />
+        </a>
+        <a
+          className={`
+          ${'ContentDisplayToggle__Item'} 
+          ${
+            postDisplay === 'settings'
+              ? 'ContentDisplayToggle__Item_Selected'
+              : ''
+          }
+        `}
+          onClick={() => togglePostDisplay('settings')}
+        >
+          <img src="/icons/icon-settings.svg" alt="" />
         </a>
       </div>
       <a
         href="/"
         className={`HomeArrow ${!hideMineToggle ? 'HomeArrow--Hide' : ''}`}
       >
-        <img src="/images/icon-arrow.svg" alt="return home arrow" />
+        <img src="/icons/icon-arrow.svg" alt="return home arrow" />
       </a>
     </div>
 

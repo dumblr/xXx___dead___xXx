@@ -14,36 +14,7 @@ class TextPost extends React.Component {
       // whisperContent: ''
     };
   }
-  // createTextPost = () => {
-  //   let title = this.state.titleContent;
-  //   let slug = title
-  //     .toLowerCase()
-  //     .replace(/ /g, '-')
-  //     .replace(/[^\w-]+/g, '');
-  //   let text = this.state.textContent;
-  //   let id = this.makeId();
-  //   let date = new Date().toString();
-  //   let outputJson = {
-  //     id: '3456789123456789',
-  //     date: date,
-  //     type: 'text',
-  //     title: title,
-  //     slug: slug,
-  //     author: 'frogs',
-  //     author_address: '#',
-  //     author_avatar: '😈',
-  //     asset_ref: false,
-  //     asset_description: false,
-  //     text_data: [
-  //       {
-  //         html_tag: 'p',
-  //         content: text
-  //       }
-  //     ]
-  //   };
 
-  // await archive.writeFile('/mine/posts/' + id + '.json', outputJson);
-  // }
   async componentDidMount() {}
 
   fieldChange = (e, str) => {
@@ -62,8 +33,16 @@ class TextPost extends React.Component {
     const archive = await new global.DatArchive(DAT_URL);
     await archive.writeFile(
       `/posts/${newPostId}.json`,
-      fileContents(titleContent, JSON.stringify(textContent), newPostId, 'text')
+      fileContents(
+        titleContent,
+        JSON.stringify(textContent),
+        '',
+        newPostId,
+        'text',
+        'Post Author'
+      )
     );
+    //--- TODO Add Post Author above here...
 
     this.setState({
       titleContent: '',
@@ -73,12 +52,6 @@ class TextPost extends React.Component {
     this.props.getPosts(archive);
     this.props.toggleContentSelection();
   };
-
-  // deleteLink = async postId => {
-  //   const archive = await new global.DatArchive(DAT_URL);
-  //   await archive.unlink(`/posts/${postId}.json`);
-  //   this.props.getPosts(archive);
-  // };
 
   render() {
     return (

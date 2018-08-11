@@ -46,7 +46,7 @@ class ContentSelection extends React.Component {
               onClick={() => this.togglePostType('image')}
             >
               <img
-                src="/images/icon-image.png"
+                src="/icons/icon-image.png"
                 alt="Add Visual Content Selector"
               />
               <p>Image</p>
@@ -60,7 +60,7 @@ class ContentSelection extends React.Component {
               }`}
               onClick={() => this.togglePostType('text')}
             >
-              <img src="/images/icon-pencil.png" alt="Add Text Selector" />
+              <img src="/icons/icon-pencil.png" alt="Add Text Selector" />
               <p>Text</p>
             </div>
           </div>
@@ -72,7 +72,10 @@ class ContentSelection extends React.Component {
             }`}
           >
             {this.state.showPostType === 'image' && (
-              <ImagePost getPosts={this.props.getPosts} />
+              <ImagePost
+                getPosts={this.props.getPosts}
+                toggleContentSelection={this.props.toggleContentSelection}
+              />
             )}
             {this.state.showPostType === 'text' && (
               <TextPost

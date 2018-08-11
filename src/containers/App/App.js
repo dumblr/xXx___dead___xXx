@@ -11,7 +11,7 @@ class App extends Component {
     super(props);
     this.state = {
       posts: [],
-      postDisplay: 'mine',
+      postDisplay: 'theirs',
       contentSelectionOpen: false,
       correctBrowser: false
     };
@@ -85,7 +85,7 @@ class App extends Component {
   };
 
   render() {
-    const sortedPosts = sortBy(this.state.posts, ['createdAt']).reverse();
+    const sortedPosts = sortBy(this.state.posts, ['createdAt']);
     return (
       <Router>
         <div>

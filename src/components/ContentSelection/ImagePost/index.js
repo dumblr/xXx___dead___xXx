@@ -1,4 +1,8 @@
 import React from 'react';
+import { DAT_URL } from './../../../config';
+import { v4 } from 'uuid';
+
+import fileContents from './../../../utils/fileContents';
 
 import Button from '../../SharedComponents/Button';
 
@@ -6,23 +10,40 @@ class ImagePost extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      titleImage: '',
-      descriptionImage: ''
-      // whisperImage: ''
+      titleContent: '',
+      textContent: '', // Image Description
+      imagePath: ''
     };
-
-    this.valueUpdater = this.valueUpdater.bind(this);
   }
 
-  valueUpdater = field => event => {
-    let value = event.target.value;
+  async componentDidMount() {}
 
-    const newState = {
-      ...this.state,
-      [field]: value
-    };
+  fieldChange = (e, str) => {
+    this.setState({
+      [str]: e.target.value
+    });
+  };
 
-    this.setState(newState);
+  formSubmit = e => {
+    e.preventDefault();
+    this.writePost(this.state.titleContent, this.state.textContent);
+  };
+
+  writePost = async (titleContent, textContent) => {
+    const newPostId = await v4();
+    const archive = await new global.DatArchive(DAT_URL);
+    await archive.writeFile(
+      `/posts/${newPostId}.json`,
+      fileContents(titleContent, JSON.stringify(textContent), newPostId, 'text')
+    );
+
+    this.setState({
+      titleContent: '',
+      textContent: ''
+    });
+
+    this.props.getPosts(archive);
+    this.props.toggleContentSelection();
   };
 
   render() {
@@ -38,8 +59,8 @@ class ImagePost extends React.Component {
               id="title-entry"
               type="text"
               name="title"
-              value={this.state.titleImage}
-              onChange={this.valueUpdater('titleImage')}
+              value={this.state.titleContent}
+              onChange={e => this.fieldChange(e, 'titleContent')}
             />
             <label htmlFor="title-entry">Title</label>
           </div>
@@ -69,7 +90,7 @@ class ImagePost extends React.Component {
               type="text"
               name="title"
               value={this.state.descriptionImage}
-              onChange={this.valueUpdater('descriptionImage')}
+              onChange={e => this.fieldChange(e, 'textContent')}
             />
             <label htmlFor="description-entry">Image Description</label>
           </div>

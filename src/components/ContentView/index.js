@@ -1,6 +1,7 @@
 import React from 'react';
 
 import ContentViewLoop from './ContentViewLoop';
+import Settings from './Settings';
 
 const ContentView = ({ posts, postDisplay, deletePost }) => (
   <section className={'ContentView'}>
@@ -10,6 +11,7 @@ const ContentView = ({ posts, postDisplay, deletePost }) => (
     {postDisplay === 'theirs' && (
       <ContentViewLoop deletePost={deletePost} posts={posts} />
     )}
+    {postDisplay === 'settings' && <Settings />}
   </section>
 );
 

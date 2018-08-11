@@ -2,9 +2,9 @@ import React from 'react';
 
 import TextPost from './TextPost';
 import ImagePost from './ImagePost';
-import Trash from '../../SharedComponents/Icons/Trash';
+import EditMenu from '../../SharedComponents/EditMenu';
 
-const ContentItem = ({ vals, deletePost }) => {
+const ContentItem = ({ vals, deletePost, toggleDelete }) => {
   let DateItem = new Date(vals.createdAt);
   let Minutes = (DateItem.getMinutes() < 10 ? '0' : '') + DateItem.getMinutes();
   let Time = DateItem.getHours() + `:` + Minutes;
@@ -63,10 +63,15 @@ const ContentItem = ({ vals, deletePost }) => {
         </p>
       </div>
       <div className={'ContentItem__View'}>
+        <EditMenu
+          deletePost={deletePost}
+          postId={vals.postId}
+          toggleDelete={toggleDelete}
+        />
         <h2>
-          {vals.author_avatar} {vals.author} @ {Time}
+          {vals.author_avatar} {vals.postAuthor} @ {Time}
         </h2>
-        <h3>
+        <h3 className="ContentItem__Title">
           <a href={'/post/' + vals.postId}>{vals.titleContent}</a>
         </h3>
         {vals.postType === 'text' && (
@@ -75,11 +80,6 @@ const ContentItem = ({ vals, deletePost }) => {
         {vals.type === 'image' && (
           <ImagePost source={vals.asset_ref} altText={vals.asset_description} />
         )}
-        <div className="ContentItem__Delete">
-          <a onClick={() => deletePost(vals.postId)}>
-            <Trash />
-          </a>
-        </div>
       </div>
     </div>
   );

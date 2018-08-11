@@ -4,7 +4,7 @@
 
 ## What is _dead_?
 
-_Dead_ is a blogging/tumblog/content manufacturing device built using [dat] and running on [beaker browser]. Have you heard of tumblr before? Then you get it.
+_Dead_ is a blogging/tumblog/content manufacturing device built using [dat](https://datproject.org/) and running on [beaker browser](https://beakerbrowser.com/). Have you heard of tumblr before? Then you get it.
 
 The key difference, though, is that by running on the dat protocol, _dead_ enables each individual to create their own instance of _dead_ and to publish their own content on their own computer and share to other people who have their own _dead_ instances. This means the data lives on your computer and doesn't *require* any server space. 
 
