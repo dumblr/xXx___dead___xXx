@@ -85,6 +85,12 @@ class App extends Component {
     this.refreshPosts(archive);
   };
 
+  deletePostSingle = async postId => {
+    const archive = await new global.DatArchive(urlEnv());
+    await archive.unlink(`/posts/${postId}.json`);
+    window.location.href = '/';
+  };
+
   render() {
     const sortedPosts = sortBy(this.state.posts, ['createdAt']);
     console.log('state', this.state);
@@ -118,10 +124,12 @@ class App extends Component {
                 toggleContentSelection={this.toggleContentSelection}
                 togglePostDisplayFn={this.togglePostDisplay}
                 getPosts={this.refreshPosts}
-                {...props}
                 isOwner={this.state.isOwner}
+                correctBrowser={this.state.correctBrowser}
+                deletePost={this.deletePostSingle}
                 deadTitle={this.state.deadTitle}
                 deadDescription={this.state.deadDescription}
+                {...props}
               />
             )}
           />
