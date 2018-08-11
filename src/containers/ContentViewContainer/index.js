@@ -3,7 +3,7 @@ import React from 'react';
 import Header from '../../components/Header';
 import ContentView from '../../components/ContentView';
 import BrowserDetection from '../../components/SharedComponents/BrowserDetection';
-
+import UserInfo from '../../components/SharedComponents/UserInfo';
 const ContentViewContainer = ({
   getPosts,
   postDisplay,
@@ -12,21 +12,31 @@ const ContentViewContainer = ({
   posts,
   contentSelectionOpen,
   correctBrowser,
-  deletePost
+  deletePost,
+  isOwner,
+  deadTitle,
+  deadDescription
 }) => (
   <div className="App">
-    <Header
-      contentSelectionOpen={contentSelectionOpen}
-      postDisplay={postDisplay}
-      togglePostDisplay={togglePostDisplayFn}
-      getPosts={getPosts}
-      toggleContentSelection={toggleContentSelection}
-    />
+    {isOwner && (
+      <Header
+        contentSelectionOpen={contentSelectionOpen}
+        postDisplay={postDisplay}
+        togglePostDisplay={togglePostDisplayFn}
+        getPosts={getPosts}
+        toggleContentSelection={toggleContentSelection}
+      />
+    )}
+    {!isOwner && (
+      <UserInfo deadTitle={deadTitle} deadDescription={deadDescription} />
+    )}
     {!correctBrowser && <BrowserDetection />}
     <ContentView
       deletePost={deletePost}
       postDisplay={postDisplay}
       posts={posts}
+      correctBrowser={correctBrowser}
+      isOwner={isOwner}
     />
   </div>
 );

@@ -4,7 +4,7 @@ import TextPost from './TextPost';
 import ImagePost from './ImagePost';
 import EditMenu from '../../SharedComponents/EditMenu';
 
-const ContentItem = ({ vals, deletePost, toggleDelete }) => {
+const ContentItem = ({ vals, deletePost, toggleDelete, isOwner }) => {
   let DateItem = new Date(vals.createdAt);
   let Minutes = (DateItem.getMinutes() < 10 ? '0' : '') + DateItem.getMinutes();
   let Time = DateItem.getHours() + `:` + Minutes;
@@ -63,11 +63,13 @@ const ContentItem = ({ vals, deletePost, toggleDelete }) => {
         </p>
       </div>
       <div className={'ContentItem__View'}>
-        <EditMenu
-          deletePost={deletePost}
-          postId={vals.postId}
-          toggleDelete={toggleDelete}
-        />
+        {isOwner && (
+          <EditMenu
+            deletePost={deletePost}
+            postId={vals.postId}
+            toggleDelete={toggleDelete}
+          />
+        )}
         <h2>
           {vals.author_avatar} {vals.postAuthor} @ {Time}
         </h2>

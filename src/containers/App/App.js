@@ -10,10 +10,11 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      posts: [],
-      postDisplay: 'theirs',
       contentSelectionOpen: false,
-      correctBrowser: false
+      correctBrowser: false,
+      isOwner: false,
+      posts: [],
+      postDisplay: 'theirs'
     };
   }
 
@@ -37,8 +38,8 @@ class App extends Component {
   setInfo = archiveInfo => {
     this.setState({
       ...(archiveInfo.isOwner && { isOwner: true }),
-      listTitle: archiveInfo.title,
-      listDescription: archiveInfo.description
+      deadTitle: archiveInfo.title,
+      deadDescription: archiveInfo.description
     });
   };
 
@@ -86,6 +87,7 @@ class App extends Component {
 
   render() {
     const sortedPosts = sortBy(this.state.posts, ['createdAt']);
+    console.log('state', this.state);
     return (
       <Router>
         <div>
@@ -98,10 +100,13 @@ class App extends Component {
                 toggleContentSelection={this.toggleContentSelection}
                 postDisplay={this.state.postDisplay}
                 posts={sortedPosts}
+                isOwner={this.state.isOwner}
                 getPosts={this.refreshPosts}
                 togglePostDisplayFn={this.togglePostDisplay}
                 correctBrowser={this.state.correctBrowser}
                 deletePost={this.deletePost}
+                deadTitle={this.state.deadTitle}
+                deadDescription={this.state.deadDescription}
               />
             )}
           />
