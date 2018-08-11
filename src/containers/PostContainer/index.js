@@ -42,7 +42,12 @@ class PostContainer extends React.Component {
           postDisplay={this.state.postDisplay}
           hideMineToggle={true}
         />
-        <Post post={this.state.postData} />
+        <Post
+          post={this.state.postData}
+          isOwner={this.props.isOwner}
+          deadTitle={this.props.deadTitle}
+          deadDescription={this.props.deadDescription}
+        />
       </div>
     );
   }

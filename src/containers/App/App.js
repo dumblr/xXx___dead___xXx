@@ -119,6 +119,9 @@ class App extends Component {
                 togglePostDisplayFn={this.togglePostDisplay}
                 getPosts={this.refreshPosts}
                 {...props}
+                isOwner={this.state.isOwner}
+                deadTitle={this.state.deadTitle}
+                deadDescription={this.state.deadDescription}
               />
             )}
           />
