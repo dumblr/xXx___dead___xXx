@@ -52,7 +52,6 @@ const ContentItem = ({ vals, deletePost, toggleDelete, isOwner }) => {
     default:
       MonthWord = '';
   }
-  console.log('va;s', vals);
   return (
     <div className={'ContentItem'}>
       <div className={'ContentItem__Date'}>

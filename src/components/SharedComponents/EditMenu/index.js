@@ -14,7 +14,6 @@ class EditMenu extends React.Component {
   }
 
   toggleModal = () => {
-    console.log('toggle');
     this.setState({
       toggleModal: !this.state.toggleModal
     });

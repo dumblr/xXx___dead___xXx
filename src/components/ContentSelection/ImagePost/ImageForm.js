@@ -1,7 +1,13 @@
 import React from 'react';
 
-const ImageForm = ({ changeFn, submitFn, titleContent, textContent }) => (
-  <form onSubmit={e => submitFn(e)}>
+const ImageForm = ({
+  changeFn,
+  submitFn,
+  titleContent,
+  textContent,
+  handleFiles
+}) => (
+  <form onSubmit={e => submitFn(e)} encType="multipart/form-data">
     <div
       className={`${'FormElement'} ${
         titleContent !== '' ? 'FormElementActive' : ''
@@ -17,12 +23,14 @@ const ImageForm = ({ changeFn, submitFn, titleContent, textContent }) => (
     </div>
     <div className={'Box'}>
       <input
+        accept=".jpeg, .jpg, .png, .gif"
         className={'Box__File'}
         type="file"
-        name="files[]"
+        name="file"
         id="file"
         data-multiple-caption="{count} files selected"
         multiple
+        onChange={() => handleFiles()}
       />
       <label htmlFor="file">
         Choose a file

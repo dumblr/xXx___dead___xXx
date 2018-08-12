@@ -29,7 +29,6 @@ class App extends Component {
       const archiveInfo = await archive.getInfo();
       this.refreshPosts(archive);
       this.setInfo(archiveInfo);
-      console.log('success');
     } catch (error) {
       console.log(error);
     }
