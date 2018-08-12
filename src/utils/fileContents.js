@@ -16,6 +16,3 @@ const fileContents = (
 }`;
 
 export default fileContents;
-
-//--- Future additions/modifications
-// "imageContent": "${postImage}",

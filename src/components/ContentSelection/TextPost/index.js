@@ -40,7 +40,6 @@ class TextPost extends React.Component {
         this.props.userData.name
       )
     );
-    //--- TODO Add Post Author above here...
 
     this.setState({
       titleContent: '',

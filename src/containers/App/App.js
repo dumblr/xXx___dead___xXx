@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import sortBy from 'lodash.sortby';
+import urlEnv from '../../utils/urlEnv';
 
 import ContentViewContainer from '../ContentViewContainer';
 import Settings from '../Settings';
-import urlEnv from '../../utils/urlEnv';
 import PostContainer from '../PostContainer/index';
 
 class App extends Component {
@@ -153,6 +153,7 @@ class App extends Component {
                 correctBrowser={this.state.correctBrowser}
                 deadTitle={this.state.deadTitle}
                 deadDescription={this.state.deadDescription}
+                userData={this.state.userData}
                 {...props}
               />
             )}
