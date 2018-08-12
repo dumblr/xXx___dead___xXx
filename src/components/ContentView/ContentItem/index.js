@@ -52,7 +52,7 @@ const ContentItem = ({ vals, deletePost, toggleDelete, isOwner }) => {
     default:
       MonthWord = '';
   }
-
+  console.log('va;s', vals);
   return (
     <div className={'ContentItem'}>
       <div className={'ContentItem__Date'}>
@@ -79,8 +79,12 @@ const ContentItem = ({ vals, deletePost, toggleDelete, isOwner }) => {
         {vals.postType === 'text' && (
           <TextPost textContent={vals.textContent} />
         )}
-        {vals.type === 'image' && (
-          <ImagePost source={vals.asset_ref} altText={vals.asset_description} />
+        {vals.postType === 'image' && (
+          <ImagePost
+            postTitle={vals.titleContent}
+            textContent={vals.textContent}
+            imageSource={vals.imageSource}
+          />
         )}
       </div>
     </div>

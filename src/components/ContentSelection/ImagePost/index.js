@@ -3,16 +3,15 @@ import { DAT_URL } from './../../../config';
 import { v4 } from 'uuid';
 
 import fileContents from './../../../utils/fileContents';
-
-import Button from '../../SharedComponents/Button';
+import ImageForm from './ImageForm';
 
 class ImagePost extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       titleContent: '',
-      textContent: '', // Image Description
-      imagePath: ''
+      textContent: '',
+      imagePath: '/images/69.jpg'
     };
   }
 
@@ -26,20 +25,32 @@ class ImagePost extends React.Component {
 
   formSubmit = e => {
     e.preventDefault();
-    this.writePost(this.state.titleContent, this.state.textContent);
+    this.writePost(
+      this.state.titleContent,
+      this.state.textContent,
+      this.state.imagePath
+    );
   };
 
-  writePost = async (titleContent, textContent) => {
+  writePost = async (titleContent, textContent, imagePath) => {
     const newPostId = await v4();
     const archive = await new global.DatArchive(DAT_URL);
     await archive.writeFile(
       `/posts/${newPostId}.json`,
-      fileContents(titleContent, JSON.stringify(textContent), newPostId, 'text')
+      fileContents(
+        titleContent,
+        JSON.stringify(textContent),
+        imagePath,
+        newPostId,
+        'image',
+        'Post Author'
+      )
     );
 
     this.setState({
       titleContent: '',
-      textContent: ''
+      textContent: '',
+      imagePath: ''
     });
 
     this.props.getPosts(archive);
@@ -49,59 +60,13 @@ class ImagePost extends React.Component {
   render() {
     return (
       <div className={'ImagePost'}>
-        <form encType="multipart/form-data">
-          <div
-            className={`${'FormElement'} ${
-              this.state.titleImage !== '' ? 'FormElementActive' : ''
-            }`}
-          >
-            <input
-              id="title-entry"
-              type="text"
-              name="title"
-              value={this.state.titleContent}
-              onChange={e => this.fieldChange(e, 'titleContent')}
-            />
-            <label htmlFor="title-entry">Title</label>
-          </div>
-
-          <div className={'Box'}>
-            <input
-              className={'Box__File'}
-              type="file"
-              name="files[]"
-              id="file"
-              data-multiple-caption="{count} files selected"
-              multiple
-            />
-            <label htmlFor="file">
-              Choose a file
-              <span className={'Box__Dragndrop'}> or drag it here</span>
-            </label>
-          </div>
-
-          <div
-            className={`${'FormElement'} ${
-              this.state.descriptionImage !== '' ? 'FormElementActive' : ''
-            }`}
-          >
-            <input
-              id="description-entry"
-              type="text"
-              name="title"
-              value={this.state.descriptionImage}
-              onChange={e => this.fieldChange(e, 'textContent')}
-            />
-            <label htmlFor="description-entry">Image Description</label>
-          </div>
-
-          {/* <div className={'FormElementCheckbox'}>
-            <input type="checkbox" id="whisperImage" />
-            <label htmlFor="whisperImage">Keep this post to myself</label>
-          </div> */}
-
-          <Button buttonText={'Upload Image'} />
-        </form>
+        <ImageForm
+          changeFn={this.fieldChange}
+          submitFn={this.formSubmit}
+          titleContent={this.state.titleContent}
+          textContent={this.state.textContent}
+          imagePath={this.state.imagePath}
+        />
       </div>
     );
   }

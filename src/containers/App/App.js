@@ -93,7 +93,6 @@ class App extends Component {
 
   render() {
     const sortedPosts = sortBy(this.state.posts, ['createdAt']);
-    console.log('state', this.state);
     return (
       <Router>
         <div>

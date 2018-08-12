@@ -9,7 +9,7 @@ const fileContents = (
   "postId": "${postIdStr}",
   "titleContent": "${postTitle}",
   "textContent": ${postText},
-  "imageContent": "${postImage}",
+  "imageSource": "${postImage}",
   "createdAt": "${new Date()}",
   "postType": "${postType}",
   "postAuthor": "${postAuthor}"
