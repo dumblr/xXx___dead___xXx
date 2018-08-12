@@ -49,14 +49,14 @@ const Header = ({
         </a>
         <a
           className={`
-          ${'ContentDisplayToggle__Item'} 
-          ${
-            postDisplay === 'settings'
-              ? 'ContentDisplayToggle__Item_Selected'
-              : ''
-          }
-        `}
-          onClick={() => togglePostDisplay('settings')}
+            ${'ContentDisplayToggle__Item'} 
+            ${
+              postDisplay === 'settings'
+                ? 'ContentDisplayToggle__Item_Selected'
+                : ''
+            }
+          `}
+          href="/settings"
         >
           <img src="/icons/icon-settings.svg" alt="" />
         </a>

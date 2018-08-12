@@ -12,7 +12,6 @@ const ImageForm = ({
   resetImagePath
 }) => (
   <form onSubmit={e => submitFn(e)} encType="multipart/form-data">
-    {console.log('imageFile', imageFile)}
     <div
       className={`${'FormElement'} ${
         titleContent !== '' ? 'FormElementActive' : ''
@@ -43,7 +42,7 @@ const ImageForm = ({
         <div className="ImagePreview__Delete" onClick={() => resetImagePath()}>
           <ImageDelete />
         </div>
-        <img src={imageFile} alt="image preview" />
+        <img src={imageFile} alt="file preview" />
       </div>
     )}
 

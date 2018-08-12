@@ -4,6 +4,7 @@ import Header from '../../components/Header';
 import ContentView from '../../components/ContentView';
 import BrowserDetection from '../../components/SharedComponents/BrowserDetection';
 import UserInfo from '../../components/SharedComponents/UserInfo';
+
 const ContentViewContainer = ({
   getPosts,
   postDisplay,

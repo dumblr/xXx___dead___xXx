@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import sortBy from 'lodash.sortby';
 
 import ContentViewContainer from '../ContentViewContainer';
+import Settings from '../Settings';
 import urlEnv from '../../utils/urlEnv';
 import PostContainer from '../PostContainer/index';
 
@@ -100,7 +101,6 @@ class App extends Component {
 
   render() {
     const sortedPosts = sortBy(this.state.posts, ['createdAt']);
-    console.log('state', this.state);
     return (
       <Router>
         <div>
@@ -135,6 +135,22 @@ class App extends Component {
                 isOwner={this.state.isOwner}
                 correctBrowser={this.state.correctBrowser}
                 deletePost={this.deletePostSingle}
+                deadTitle={this.state.deadTitle}
+                deadDescription={this.state.deadDescription}
+                {...props}
+              />
+            )}
+          />
+          <Route
+            path="/settings"
+            render={props => (
+              <Settings
+                contentSelectionOpen={this.state.contentSelectionOpen}
+                toggleContentSelection={this.toggleContentSelection}
+                togglePostDisplayFn={this.togglePostDisplay}
+                getPosts={this.refreshPosts}
+                isOwner={this.state.isOwner}
+                correctBrowser={this.state.correctBrowser}
                 deadTitle={this.state.deadTitle}
                 deadDescription={this.state.deadDescription}
                 {...props}

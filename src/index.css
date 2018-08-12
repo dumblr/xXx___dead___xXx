@@ -16,8 +16,10 @@ body {
   max-width: 1040px;
   padding-top: 100px;
 }
-.Post__Title {
-  padding-bottom: 30px;
+
+.Post .ContentItem__Title a {
+  font-size: 36px;
+  line-height: 40px;
 }
 .Header {
   background-color: rgba(255, 255, 255, 0.8);
