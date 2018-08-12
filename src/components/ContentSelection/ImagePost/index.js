@@ -33,36 +33,16 @@ class ImagePost extends React.Component {
   };
 
   handleFiles = async () => {
-    // let filesArray = []
     let getFiles = document.getElementById('file').files;
-    // for(let i = 0; i < getFiles.length; i++) {
-    //   filesArray.push(getFiles[i])
-    // }
-    this.writeFile(getFiles);
-    // return this.setFilesState(filesArray);
-  };
-
-  // setFilesState = (filesArray) => {
-  //   this.setState({
-  //     imageFiles: filesArray
-  //   }, () => console.log('files', this.state.imageFiles))
-  // };
-
-  writeFile = async files => {
-    const archive = await new global.DatArchive(DAT_URL);
-
-    if (files) {
-      let f = files[0];
+    if (getFiles.length > 0) {
+      let f = getFiles[0];
       let reader = new FileReader();
-      let imageId = await v4();
       reader.onload = () => {
-        archive.writeFile(`/images/${imageId}.jpg`, reader.result);
+        this.setState({
+          imagePath: reader.result
+        });
       };
       reader.readAsDataURL(f);
-
-      this.setState({
-        imagePath: '/images/' + imageId + '.jpg'
-      });
     }
   };
 
