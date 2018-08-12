@@ -61,15 +61,20 @@ class ImagePost extends React.Component {
         imageFiles,
         newPostId,
         'image',
-        'Post Author'
+        this.props.userData.name
       )
     );
 
-    this.setState({
-      titleContent: '',
-      textContent: '',
-      imagePath: ''
-    });
+    this.setState(
+      {
+        titleContent: '',
+        textContent: '',
+        imagePath: ''
+      },
+      () => {
+        document.getElementById('file').value = null;
+      }
+    );
 
     this.props.getPosts(archive);
     this.props.toggleContentSelection();

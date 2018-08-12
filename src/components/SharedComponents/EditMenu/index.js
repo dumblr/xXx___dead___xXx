@@ -45,6 +45,7 @@ class EditMenu extends React.Component {
           postId={this.props.postId}
           showModal={this.state.toggleModal}
           toggleModal={this.toggleModal}
+          toggleMenuOpen={this.toggleMenuOpen}
         />
       </div>
     );
