@@ -11,7 +11,7 @@ class ImagePost extends React.Component {
     this.state = {
       titleContent: '',
       textContent: '',
-      imageFiles: ''
+      imageFile: ''
     };
   }
 
@@ -28,7 +28,7 @@ class ImagePost extends React.Component {
     this.writePost(
       this.state.titleContent,
       this.state.textContent,
-      this.state.imagePath
+      this.state.imageFile
     );
   };
 
@@ -39,7 +39,7 @@ class ImagePost extends React.Component {
       let reader = new FileReader();
       reader.onload = () => {
         this.setState({
-          imagePath: reader.result
+          imageFile: reader.result
         });
       };
       reader.readAsDataURL(f);
@@ -50,7 +50,7 @@ class ImagePost extends React.Component {
     const newPostId = await v4();
     const archive = await new global.DatArchive(DAT_URL);
 
-    const imageFiles = this.state.imagePath;
+    const imageFile = this.state.imageFile;
 
     // const imagesArray = ['/images/69.jpg', '/images/69.jpg']
     await archive.writeFile(
@@ -58,7 +58,7 @@ class ImagePost extends React.Component {
       fileContents(
         titleContent,
         JSON.stringify(textContent),
-        imageFiles,
+        imageFile,
         newPostId,
         'image',
         this.props.userData.name
@@ -69,7 +69,7 @@ class ImagePost extends React.Component {
       {
         titleContent: '',
         textContent: '',
-        imagePath: ''
+        imageFile: ''
       },
       () => {
         document.getElementById('file').value = null;
@@ -78,6 +78,12 @@ class ImagePost extends React.Component {
 
     this.props.getPosts(archive);
     this.props.toggleContentSelection();
+  };
+
+  resetImagePath = () => {
+    this.setState({
+      imageFile: ''
+    });
   };
 
   render() {
@@ -89,6 +95,8 @@ class ImagePost extends React.Component {
           titleContent={this.state.titleContent}
           textContent={this.state.textContent}
           handleFiles={this.handleFiles}
+          imageFile={this.state.imageFile}
+          resetImagePath={this.resetImagePath}
         />
       </div>
     );

@@ -1,13 +1,18 @@
 import React from 'react';
 
+import ImageDelete from '../../SharedComponents/Icons/ImageDelete';
+
 const ImageForm = ({
   changeFn,
   submitFn,
   titleContent,
   textContent,
-  handleFiles
+  handleFiles,
+  imageFile,
+  resetImagePath
 }) => (
   <form onSubmit={e => submitFn(e)} encType="multipart/form-data">
+    {console.log('imageFile', imageFile)}
     <div
       className={`${'FormElement'} ${
         titleContent !== '' ? 'FormElementActive' : ''
@@ -21,22 +26,27 @@ const ImageForm = ({
       />
       <label htmlFor="title-entry">Title</label>
     </div>
-    <div className={'Box'}>
-      <input
-        accept=".jpeg, .jpg, .png, .gif"
-        className={'Box__File'}
-        type="file"
-        name="file"
-        id="file"
-        data-multiple-caption="{count} files selected"
-        multiple
-        onChange={() => handleFiles()}
-      />
-      <label htmlFor="file">
-        Choose a file
-        <span className={'Box__Dragndrop'}> or drag it here</span>
-      </label>
-    </div>
+    {imageFile === '' ? (
+      <div className={'Box'}>
+        <input
+          accept=".jpeg, .jpg, .png, .gif"
+          className={'Box__File'}
+          type="file"
+          name="file"
+          id="file"
+          onChange={() => handleFiles()}
+        />
+        <label htmlFor="file">Choose a file or drag it here</label>
+      </div>
+    ) : (
+      <div className="ImagePreview">
+        <div className="ImagePreview__Delete" onClick={() => resetImagePath()}>
+          <ImageDelete />
+        </div>
+        <img src={imageFile} alt="image preview" />
+      </div>
+    )}
+
     <div
       className={`${'FormElement'} ${'FormElementTextArea'} ${
         textContent !== '' ? 'FormElementActive' : ''
