@@ -2,6 +2,7 @@ import React from 'react';
 import { DAT_URL } from './../../config';
 import Header from '../../components/Header';
 import Post from '../../components/Post';
+import UserInfo from '../../components/SharedComponents/UserInfo';
 
 class PostContainer extends React.Component {
   constructor(props) {
@@ -34,15 +35,28 @@ class PostContainer extends React.Component {
   render() {
     return (
       <div className="App">
-        <Header
-          contentSelectionOpen={this.props.contentSelectionOpen}
-          toggleContentSelection={this.props.toggleContentSelection}
-          togglePostDisplay={this.props.togglePostDisplayFn}
-          getPosts={this.props.getPosts}
-          postDisplay={this.state.postDisplay}
-          hideMineToggle={true}
+        {this.props.isOwner && (
+          <Header
+            contentSelectionOpen={this.props.contentSelectionOpen}
+            toggleContentSelection={this.props.toggleContentSelection}
+            togglePostDisplay={this.props.togglePostDisplayFn}
+            getPosts={this.props.getPosts}
+            postDisplay={this.state.postDisplay}
+            hideMineToggle={true}
+          />
+        )}
+        {!this.props.isOwner && (
+          <UserInfo
+            deadTitle={this.props.deadTitle}
+            deadDescription={this.props.deadDescription}
+          />
+        )}
+        <Post
+          post={this.state.postData}
+          isOwner={this.props.isOwner}
+          correctBrowser={this.props.correctBrowser}
+          deletePost={this.props.deletePost}
         />
-        <Post post={this.state.postData} />
       </div>
     );
   }
