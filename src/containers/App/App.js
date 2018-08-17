@@ -99,7 +99,7 @@ class App extends Component {
   };
 
   render() {
-    const sortedPosts = sortBy(this.state.posts, ['createdAt']);
+    const sortedPosts = sortBy(this.state.posts, ['createdAt']).reverse();
     console.log('state', this.state);
     return (
       <Router>
