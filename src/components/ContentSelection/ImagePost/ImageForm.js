@@ -43,7 +43,7 @@ const ImageForm = ({
         <div className="ImagePreview__Delete" onClick={() => resetImagePath()}>
           <ImageDelete />
         </div>
-        <img src={imageFile} alt="image preview" />
+        <img src={imageFile} alt="preview" />
       </div>
     )}
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ContentViewLoop = ({}) => (
+const ContentViewLoop = () => (
   <div>
     <h2>Settings</h2>
     <p>Settings will go here!</p>
