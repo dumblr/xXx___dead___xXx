@@ -245,123 +245,31 @@ h5 {
   max-width: 400px;
   width: 100%;
 }
-.FormElement {
-  margin-bottom: 20px;
-  position: relative;
-  width: 100%;
-}
-.FormElement .FormElement input[type='text'],
-.FormElement .FormElement textarea {
-  backface-visibility: hidden;
-  background: rgba(255, 255, 255, 0.8);
+.Box {
+  background: #fff;
   border: 1px solid #e5e5e5;
   border-radius: 2px;
-  font-size: 18px;
-  outline: none;
-  padding: 10px;
-  position: relative;
+  margin: 30px 0 22px 0;
+  padding: 30px 15px;
   width: 100%;
-  z-index: 3;
 }
-.FormElement
-  .FormElement
-  input[type='text']
-  .FormElement
-  input[type='text']:focus,
-.FormElement .FormElement textarea .FormElement input[type='text']:focus,
-.FormElement .FormElement input[type='text'] .FormElement textarea:focus,
-.FormElement .FormElement textarea .FormElement textarea:focus {
-  outline: none;
-}
-.FormElement
-  .FormElement
-  input[type='text']
-  .FormElement
-  input[type='text']:focus
-  ~ label,
-.FormElement
-  .FormElement
-  textarea
-  .FormElement
-  input[type='text']:focus
-  ~ label,
-.FormElement
-  .FormElement
-  input[type='text']
-  .FormElement
-  textarea:focus
-  ~ label,
-.FormElement .FormElement textarea .FormElement textarea:focus ~ label {
-  font-size: 12px;
-  z-index: 4;
-  transform: translate(0px, -35px);
-}
-.FormElement label {
-  font-weight: bold;
-  left: 13px;
-  position: absolute;
-  text-transform: uppercase;
-  top: 12px;
-  transition: transform 200ms ease;
-  user-select: none;
-}
-.FormElementCheckbox {
-  align-items: center;
-  display: flex;
-  justify-content: flex-start;
-}
-.FormElementCheckbox .FormElementCheckbox input[type='checkbox'] {
-  -webkit-appearance: none;
-  appearance: none;
-  backface-visibility: hidden;
-  background: #fff;
-  margin-bottom: 20px;
-  outline: none;
-  position: relative;
-  transition: background 200ms ease;
-  z-index: 2;
-}
-.FormElementCheckbox
-  .FormElementCheckbox
-  input[type='checkbox']
-  .FormElementCheckbox
-  input[type='checkbox']:checked {
-  background: #000;
-}
-.FormElementCheckbox
-  .FormElementCheckbox
-  input[type='checkbox']
-  .FormElementCheckbox
-  input[type='checkbox']:checked
-  ~ label {
-  opacity: 1;
-}
-.FormElementCheckbox label {
-  color: #000;
-  font-size: 12px;
-  font-weight: bold;
-  left: 8px;
-  opacity: 0.4;
-  position: relative;
-  top: -8px;
-  text-transform: uppercase;
-  transition: opacity 200ms ease;
-}
-.FormElementTextArea .FormElementTextArea label {
-  top: 27px;
-}
-.FormElementActive input[type='text'] ~ label,
-.FormElementActive textarea ~ label {
-  font-size: 12px;
-  transform: translate(0px, -35px);
-  z-index: 4;
-}
-.ImagePost form {
-  max-width: 400px;
+.Box input {
   width: 100%;
+}
+.Box label {
+  color: #ccc;
+  margin-top: 15px;
+}
+.BrowserDetection {
+  margin: 0 auto;
+  max-width: 500px;
+  padding: 150px 20px;
+}
+.BrowserDetection a {
+  color: red;
 }
 .FormElement {
-  margin-bottom: 40px;
+  margin-bottom: 24px;
   position: relative;
   width: 100%;
 }
@@ -383,16 +291,6 @@ h5 {
 .FormElement textarea {
   font-size: 12px;
 }
-.FormElement input[type='text']:focus,
-.FormElement textarea:focus {
-  outline: none;
-}
-.FormElement input[type='text']:focus ~ label,
-.FormElement textarea:focus ~ label {
-  font-size: 12px;
-  z-index: 4;
-  transform: translate(0px, -35px);
-}
 .FormElement label {
   font-weight: bold;
   left: 13px;
@@ -401,6 +299,18 @@ h5 {
   top: 13px;
   transition: transform 200ms ease;
   user-select: none;
+}
+.FormElement input[type='text']:focus,
+.FormElement textarea:focus {
+  outline: none;
+}
+.FormElement input[type='text']:focus ~ label,
+.FormElement textarea:focus ~ label,
+.FormElementActive input[type='text'] ~ label,
+.FormElementActive textarea ~ label {
+  font-size: 12px;
+  transform: translate(0px, -31px);
+  z-index: 4;
 }
 .FormElementCheckbox {
   align-items: center;
@@ -418,12 +328,6 @@ h5 {
   transition: background 200ms ease;
   z-index: 2;
 }
-.FormElementCheckbox input[type='checkbox']:checked {
-  background: #000;
-}
-.FormElementCheckbox input[type='checkbox']:checked ~ label {
-  opacity: 1;
-}
 .FormElementCheckbox label {
   color: #000;
   font-size: 12px;
@@ -435,36 +339,17 @@ h5 {
   text-transform: uppercase;
   transition: opacity 200ms ease;
 }
-.FormElementActive input[type='text'] ~ label,
-.FormElementActive textarea ~ label {
-  font-size: 12px;
-  transform: translate(0px, -35px);
-  z-index: 4;
+.FormElementCheckbox input[type='checkbox']:checked {
+  background: #000;
 }
-.Box {
-  background: #fff;
-  border: 1px solid #e5e5e5;
-  border-radius: 2px;
-  margin: 30px 0 50px 0;
-  padding: 30px 15px;
-  width: 100%;
-}
-.Box input {
-  width: 100%;
-}
-.Box label {
-  color: #ccc;
-  margin-top: 15px;
-}
-.BrowserDetection {
-  margin: 0 auto;
-  max-width: 500px;
-  padding: 150px 20px;
-}
-.BrowserDetection a {
-  color: red;
+.FormElementCheckbox input[type='checkbox']:checked ~ label {
+  opacity: 1;
 }
 
+.ImagePost form {
+  max-width: 400px;
+  width: 100%;
+}
 .TextPost h1 {
   font-size: 30px;
   font-weight: normal;
@@ -554,4 +439,22 @@ h5 {
 }
 .DeleteModal__Show .DeleteModal__Container {
   display: flex;
+}
+.ImagePreview {
+  position: relative;
+  width: 120px;
+}
+
+.ImagePreview img {
+  height: auto;
+  width: 100%;
+}
+
+.ImagePreview__Delete svg {
+  cursor: pointer;
+  position: absolute;
+  right: -15px;
+  top: -15px;
+  transform: rotate(45deg);
+  width: 25px;
 }

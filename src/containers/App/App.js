@@ -29,11 +29,18 @@ class App extends Component {
       const archiveInfo = await archive.getInfo();
       this.refreshPosts(archive);
       this.setInfo(archiveInfo);
-      console.log('success');
+      this.getUserInfo(archive);
     } catch (error) {
       console.log(error);
     }
   }
+
+  getUserInfo = async archive => {
+    const userData = await archive.readFile(`profile.json`);
+    this.setState({
+      userData: JSON.parse(userData)
+    });
+  };
 
   setInfo = archiveInfo => {
     this.setState({
@@ -92,7 +99,7 @@ class App extends Component {
   };
 
   render() {
-    const sortedPosts = sortBy(this.state.posts, ['createdAt']);
+    const sortedPosts = sortBy(this.state.posts, ['createdAt']).reverse();
     console.log('state', this.state);
     return (
       <Router>
@@ -113,6 +120,7 @@ class App extends Component {
                 deletePost={this.deletePost}
                 deadTitle={this.state.deadTitle}
                 deadDescription={this.state.deadDescription}
+                userData={this.state.userData}
               />
             )}
           />

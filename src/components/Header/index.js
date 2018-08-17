@@ -7,7 +7,8 @@ const Header = ({
   postDisplay,
   togglePostDisplay,
   toggleContentSelection,
-  hideMineToggle
+  hideMineToggle,
+  userData
 }) => (
   <header className={`Header`}>
     <div className={`Header__Nav`}>
@@ -72,6 +73,7 @@ const Header = ({
       getPosts={getPosts}
       open={contentSelectionOpen}
       toggleContentSelection={toggleContentSelection}
+      userData={userData}
     />
   </header>
 );

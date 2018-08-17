@@ -75,12 +75,14 @@ class ContentSelection extends React.Component {
               <ImagePost
                 getPosts={this.props.getPosts}
                 toggleContentSelection={this.props.toggleContentSelection}
+                userData={this.props.userData}
               />
             )}
             {this.state.showPostType === 'text' && (
               <TextPost
                 getPosts={this.props.getPosts}
                 toggleContentSelection={this.props.toggleContentSelection}
+                userData={this.props.userData}
               />
             )}
           </div>

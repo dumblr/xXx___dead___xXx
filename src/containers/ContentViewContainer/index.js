@@ -15,7 +15,8 @@ const ContentViewContainer = ({
   deletePost,
   isOwner,
   deadTitle,
-  deadDescription
+  deadDescription,
+  userData
 }) => (
   <div className="App">
     {isOwner && (
@@ -25,6 +26,7 @@ const ContentViewContainer = ({
         togglePostDisplay={togglePostDisplayFn}
         getPosts={getPosts}
         toggleContentSelection={toggleContentSelection}
+        userData={userData}
       />
     )}
     {!isOwner && (

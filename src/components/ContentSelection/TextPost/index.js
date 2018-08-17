@@ -15,8 +15,6 @@ class TextPost extends React.Component {
     };
   }
 
-  async componentDidMount() {}
-
   fieldChange = (e, str) => {
     this.setState({
       [str]: e.target.value
@@ -39,7 +37,7 @@ class TextPost extends React.Component {
         '',
         newPostId,
         'text',
-        'Post Author'
+        this.props.userData.name
       )
     );
     //--- TODO Add Post Author above here...
