@@ -4,11 +4,11 @@
   "avatar":"",
   "follows":[
     {
-      "url":"6ce0b49e9b045877a18669a1f287a101fb99d8881d2f9fa4ce0486c022c2397d",
+      "url":"dat://6ce0b49e9b045877a18669a1f287a101fb99d8881d2f9fa4ce0486c022c2397d/",
       "name":"~~|| dead staff ||~~"
     },
     {
-      "url":"7fcca9b6889e23b39a59de3780a74445e49ab722b1cd23358381760d6202a606",
+      "url":"dat://7fcca9b6889e23b39a59de3780a74445e49ab722b1cd23358381760d6202a606/",
       "name":"another dead staff"
     }
   ]

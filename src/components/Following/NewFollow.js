@@ -1,5 +1,13 @@
 import React from 'react';
 
-const NewFollow = () => <div className="">Follow Someone New</div>;
+const NewFollow = ({ addFollower }) => (
+  <div className="">
+    <h3>Add User</h3>
+    <form onSubmit={e => addFollower(e)}>
+      <input type="text" placeholder="Dat URL" />
+      <input type="submit" />
+    </form>
+  </div>
+);
 
 export default NewFollow;

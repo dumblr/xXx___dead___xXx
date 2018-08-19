@@ -17,7 +17,8 @@ class App extends Component {
       correctBrowser: false,
       isOwner: false,
       posts: [],
-      postDisplay: 'theirs'
+      theirPosts: [],
+      postDisplay: 'mine'
     };
   }
 
@@ -26,11 +27,13 @@ class App extends Component {
       const archive = await new global.DatArchive(urlEnv());
       const archiveInfo = await archive.getInfo();
       const results = await this.refreshPosts(archive);
+      const theirresults = await this.refreshTheirPosts(archive);
       const userData = await this.getUserInfo(archive);
 
       this.setState({
         correctBrowser: true,
         posts: results,
+        theirPosts: theirresults,
         loading: false,
         ...(archiveInfo.isOwner && { isOwner: true }),
         deadTitle: archiveInfo.title,
@@ -44,8 +47,6 @@ class App extends Component {
         correctBrowser: false
       });
     }
-
-    queryFollowers();
   }
 
   getUserInfo = async archive => {
@@ -59,6 +60,23 @@ class App extends Component {
       deadTitle: archiveInfo.title,
       deadDescription: archiveInfo.description
     });
+  };
+
+  refreshTheirPosts = async archive => {
+    await queryFollowers();
+    const posts = await archive.readdir('/theirposts');
+    if (posts.length === 0) {
+      this.setState({
+        theirPosts: []
+      });
+    } else {
+      const promises = posts.map(async post => {
+        const postResponse = await archive.readFile(`/theirposts/${post}`);
+        return JSON.parse(postResponse);
+      });
+      const results = await Promise.all(promises);
+      return results;
+    }
   };
 
   refreshPosts = async archive => {
@@ -107,8 +125,14 @@ class App extends Component {
     window.location.href = '/';
   };
 
+  addFollower = e => {
+    e.preventDefault;
+    console.log('frogs');
+  };
+
+  sortedPosts = posts => sortBy(posts, ['createdAt']).reverse();
+
   render() {
-    const sortedPosts = sortBy(this.state.posts, ['createdAt']).reverse();
     return (
       <Router>
         <div>
@@ -121,7 +145,11 @@ class App extends Component {
                 contentSelectionOpen={this.state.contentSelectionOpen}
                 toggleContentSelection={this.toggleContentSelection}
                 postDisplay={this.state.postDisplay}
-                posts={sortedPosts}
+                posts={this.sortedPosts(
+                  this.state.postDisplay === 'theirs'
+                    ? this.state.theirPosts
+                    : this.state.posts
+                )}
                 isOwner={this.state.isOwner}
                 getPosts={this.refreshPosts}
                 togglePostDisplayFn={this.togglePostDisplay}
@@ -163,6 +191,7 @@ class App extends Component {
                 deadTitle={this.state.deadTitle}
                 deadDescription={this.state.deadDescription}
                 userData={this.state.userData}
+                addFollower={this.addFollower}
                 {...props}
               />
             )}

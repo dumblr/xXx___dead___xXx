@@ -3,6 +3,7 @@ import urlEnv from './urlEnv';
 const archive = new global.DatArchive(urlEnv());
 
 export const addFollower = async datUrl => {
+  console.log(datUrl);
   /*---
   1. input dat URL into input field
   2. regex out dat://
@@ -17,7 +18,7 @@ export const queryFollowers = async () => {
   const userData = await archive.readFile(`profile.json`);
   const followingArray = JSON.parse(userData).follows;
   // 2. map following users
-  await followingArray.map((follow, i) => {
+  await followingArray.map(follow => {
     queryFollowerPosts(follow);
   });
 };
@@ -26,7 +27,6 @@ const queryFollowerPosts = async follow => {
   let newArchive = new global.DatArchive(follow.url);
   // 3. query posts from following users
   let userArchive = await newArchive.readdir('/posts');
-  console.log('userArchive', userArchive);
   if (userArchive.length > 0) {
     userArchive.map(async post => {
       let postResponse = await newArchive.readFile(`/posts/${post}`);
@@ -38,8 +38,6 @@ const queryFollowerPosts = async follow => {
       await writePost(postResponse, postId);
     });
   }
-
-  // 6. update feed
 };
 
 const writePost = async (post, postId) => {

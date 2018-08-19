@@ -94,10 +94,9 @@ class Settings extends React.Component {
             />
           </div>
           <div className="Settings__Item">
-            <h2>Followers</h2>
+            <h2>Following</h2>
+            <NewFollow addFollower={this.props.addFollower} />
             <Follows />
-            <FollowSuggestions />
-            <NewFollow />
           </div>
         </div>
       </div>
