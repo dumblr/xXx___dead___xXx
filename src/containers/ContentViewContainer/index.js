@@ -6,6 +6,7 @@ import BrowserDetection from '../../components/SharedComponents/BrowserDetection
 import UserInfo from '../../components/SharedComponents/UserInfo';
 
 const ContentViewContainer = ({
+  loading,
   getPosts,
   postDisplay,
   togglePostDisplayFn,
@@ -34,13 +35,17 @@ const ContentViewContainer = ({
       <UserInfo deadTitle={deadTitle} deadDescription={deadDescription} />
     )}
     {!correctBrowser && <BrowserDetection />}
-    <ContentView
-      deletePost={deletePost}
-      postDisplay={postDisplay}
-      posts={posts}
-      correctBrowser={correctBrowser}
-      isOwner={isOwner}
-    />
+    {loading ? (
+      <div>{console.log('loading state')}loading</div>
+    ) : (
+      <ContentView
+        deletePost={deletePost}
+        postDisplay={postDisplay}
+        posts={posts}
+        correctBrowser={correctBrowser}
+        isOwner={isOwner}
+      />
+    )}
   </div>
 );
 
