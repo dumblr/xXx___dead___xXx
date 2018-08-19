@@ -173,8 +173,10 @@ h5 {
   max-width: 100%;
 }
 .ContentSelection {
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 1);
+  bottom: 0;
   height: auto;
+  left: 0;
   max-height: 0px;
   opacity: 0;
   overflow: hidden;
@@ -222,11 +224,13 @@ h5 {
 }
 .ContentSelection__Items_Slim {
   grid-template-columns: repeat(1, 50px);
+  padding-left: 20px;
 }
 .ContentSelection__ShowForm {
   flex-wrap: nowrap;
 }
 .ContentSelection__Open {
+  border: 3px solid #000;
   max-height: 800px;
   opacity: 1;
   z-index: 3;
