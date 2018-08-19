@@ -23,12 +23,12 @@ class App extends Component {
     try {
       const archive = await new global.DatArchive(urlEnv());
       const archiveInfo = await archive.getInfo();
-      const results = await this.refreshPosts(archive);
+      this.refreshPosts(archive);
       const userData = await this.getUserInfo(archive);
 
       this.setState({
         correctBrowser: true,
-        posts: results,
+
         loading: false,
         ...(archiveInfo.isOwner && { isOwner: true }),
         deadTitle: archiveInfo.title,
@@ -57,6 +57,10 @@ class App extends Component {
     });
   };
 
+  /*
+  * This method takes an archive and
+  * returns all of their posts
+  */
   refreshPosts = async archive => {
     const posts = await archive.readdir('/posts');
     if (posts.length === 0) {
@@ -69,7 +73,9 @@ class App extends Component {
         return JSON.parse(postResponse);
       });
       const results = await Promise.all(promises);
-      return results;
+      this.setState({
+        posts: results
+      });
     }
   };
 
@@ -134,6 +140,7 @@ class App extends Component {
             path="/post/:postId"
             render={props => (
               <PostContainer
+                loading={this.state.loading}
                 contentSelectionOpen={this.state.contentSelectionOpen}
                 toggleContentSelection={this.toggleContentSelection}
                 togglePostDisplayFn={this.togglePostDisplay}
