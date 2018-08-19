@@ -36,7 +36,7 @@ const ContentViewContainer = ({
     )}
     {!correctBrowser && <BrowserDetection />}
     {loading ? (
-      <div>{console.log('loading state')}loading</div>
+      <div />
     ) : (
       <ContentView
         deletePost={deletePost}
