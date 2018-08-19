@@ -1,9 +1,9 @@
 import React from 'react';
-import { DAT_URL } from './../../../config';
 import { v4 } from 'uuid';
 
 import fileContents from './../../../utils/fileContents';
 import ImageForm from './ImageForm';
+import urlEnv from '../../../utils/urlEnv';
 
 class ImagePost extends React.Component {
   constructor(props) {
@@ -48,7 +48,7 @@ class ImagePost extends React.Component {
 
   writePost = async (titleContent, textContent) => {
     const newPostId = await v4();
-    const archive = await new global.DatArchive(DAT_URL);
+    const archive = await new global.DatArchive(urlEnv());
 
     const imageFile = this.state.imageFile;
 
