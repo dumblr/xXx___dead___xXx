@@ -10,6 +10,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      loading: true,
       contentSelectionOpen: false,
       correctBrowser: false,
       isOwner: false,
@@ -19,27 +20,33 @@ class App extends Component {
   }
 
   async componentDidMount() {
-    if (navigator.userAgent.indexOf('BeakerBrowser') !== -1) {
-      this.setState({
-        correctBrowser: true
-      });
-    }
     try {
       const archive = await new global.DatArchive(urlEnv());
       const archiveInfo = await archive.getInfo();
-      this.refreshPosts(archive);
-      this.setInfo(archiveInfo);
-      this.getUserInfo(archive);
+      const results = await this.refreshPosts(archive);
+      const userData = await this.getUserInfo(archive);
+
+      this.setState({
+        correctBrowser: true,
+        posts: results,
+        loading: false,
+        ...(archiveInfo.isOwner && { isOwner: true }),
+        deadTitle: archiveInfo.title,
+        deadDescription: archiveInfo.description,
+        userData
+      });
     } catch (error) {
       console.log(error);
+      this.setState({
+        loading: false,
+        correctBrowser: false
+      });
     }
   }
 
   getUserInfo = async archive => {
     const userData = await archive.readFile(`profile.json`);
-    this.setState({
-      userData: JSON.parse(userData)
-    });
+    return JSON.parse(userData);
   };
 
   setInfo = archiveInfo => {
@@ -62,9 +69,7 @@ class App extends Component {
         return JSON.parse(postResponse);
       });
       const results = await Promise.all(promises);
-      this.setState({
-        posts: results
-      });
+      return results;
     }
   };
 
@@ -109,6 +114,7 @@ class App extends Component {
             path="/"
             render={() => (
               <ContentViewContainer
+                loading={this.state.loading}
                 contentSelectionOpen={this.state.contentSelectionOpen}
                 toggleContentSelection={this.toggleContentSelection}
                 postDisplay={this.state.postDisplay}
