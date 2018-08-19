@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import sortBy from 'lodash.sortby';
 import urlEnv from '../../utils/urlEnv';
+import { queryFollowers } from '../../utils/following';
 
 import ContentViewContainer from '../ContentViewContainer';
 import Settings from '../Settings';
@@ -34,6 +35,8 @@ class App extends Component {
     } catch (error) {
       console.log(error);
     }
+
+    queryFollowers();
   }
 
   getUserInfo = async archive => {
