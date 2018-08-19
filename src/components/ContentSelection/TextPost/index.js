@@ -1,9 +1,9 @@
 import React from 'react';
-import { DAT_URL } from './../../../config';
 import { v4 } from 'uuid';
 
 import fileContents from './../../../utils/fileContents';
 import TextForm from './TextForm';
+import urlEnv from '../../../utils/urlEnv';
 
 class TextPost extends React.Component {
   constructor(props) {
@@ -28,7 +28,7 @@ class TextPost extends React.Component {
 
   writePost = async (titleContent, textContent) => {
     const newPostId = await v4();
-    const archive = await new global.DatArchive(DAT_URL);
+    const archive = await new global.DatArchive(urlEnv());
     await archive.writeFile(
       `/posts/${newPostId}.json`,
       fileContents(

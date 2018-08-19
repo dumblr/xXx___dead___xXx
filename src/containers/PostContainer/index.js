@@ -1,8 +1,8 @@
 import React from 'react';
-import { DAT_URL } from './../../config';
 import Header from '../../components/Header';
 import Post from '../../components/Post';
 import UserInfo from '../../components/SharedComponents/UserInfo';
+import urlEnv from '../../utils/urlEnv';
 
 class PostContainer extends React.Component {
   constructor(props) {
@@ -14,7 +14,7 @@ class PostContainer extends React.Component {
   }
 
   async componentDidMount() {
-    const archive = await new global.DatArchive(DAT_URL);
+    const archive = await new global.DatArchive(urlEnv());
     this.getPost(this.props.match.params.postId, archive);
   }
 
