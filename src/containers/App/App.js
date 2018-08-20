@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import sortBy from 'lodash.sortby';
+import urlEnv from '../../utils/urlEnv';
+import profileContents from '../../utils/profileContents';
+import { queryFollowers, followURLCheck } from '../../utils/following';
 
 import ContentViewContainer from '../ContentViewContainer';
-import urlEnv from '../../utils/urlEnv';
+import Settings from '../Settings';
 import PostContainer from '../PostContainer/index';
 
 class App extends Component {
@@ -15,7 +18,10 @@ class App extends Component {
       correctBrowser: true,
       isOwner: false,
       posts: [],
-      postDisplay: 'theirs'
+      theirPosts: [],
+      postDisplay: 'mine',
+      editProfile: false,
+      userData: {}
     };
   }
 
@@ -23,12 +29,14 @@ class App extends Component {
     try {
       const archive = await new global.DatArchive(urlEnv());
       const archiveInfo = await archive.getInfo();
-      const allPosts = await this.getAllPosts(archive);
+      const results = await this.refreshPosts(archive);
+      const theirresults = await this.refreshTheirPosts(archive);
       const userData = await this.getUserInfo(archive);
 
       this.setState({
         correctBrowser: true,
-        posts: allPosts,
+        posts: results,
+        theirPosts: theirresults,
         loading: false,
         ...(archiveInfo.isOwner && { isOwner: true }),
         deadTitle: archiveInfo.title,
@@ -36,7 +44,7 @@ class App extends Component {
         userData
       });
     } catch (error) {
-      console.log(error);
+      console.log('try error', error);
       this.setState({
         loading: false,
         correctBrowser: false
@@ -57,12 +65,24 @@ class App extends Component {
     });
   };
 
-  /*
-  * This method takes an archive and
-  * returns all of their posts. 
-  * It does not setState.
-  */
-  getAllPosts = async archive => {
+  refreshTheirPosts = async archive => {
+    await queryFollowers();
+    const posts = await archive.readdir('/theirposts');
+    if (posts.length === 0) {
+      this.setState({
+        theirPosts: []
+      });
+    } else {
+      const promises = posts.map(async post => {
+        const postResponse = await archive.readFile(`/theirposts/${post}`);
+        return JSON.parse(postResponse);
+      });
+      const results = await Promise.all(promises);
+      return results;
+    }
+  };
+
+  refreshPosts = async archive => {
     const posts = await archive.readdir('/posts');
     if (posts.length === 0) {
       this.setState({
@@ -75,28 +95,6 @@ class App extends Component {
       });
       const results = await Promise.all(promises);
       return results;
-    }
-  };
-
-  /*
-  * Exact same as the above function, but
-  * also sets state.
-  */
-  getAllPostsSaved = async archive => {
-    const posts = await archive.readdir('/posts');
-    if (posts.length === 0) {
-      this.setState({
-        posts: []
-      });
-    } else {
-      const promises = posts.map(async post => {
-        const postResponse = await archive.readFile(`/posts/${post}`);
-        return JSON.parse(postResponse);
-      });
-      const results = await Promise.all(promises);
-      this.setState({
-        posts: results
-      });
     }
   };
 
@@ -130,9 +128,67 @@ class App extends Component {
     window.location.href = '/';
   };
 
+  addFollower = e => {
+    e.preventDefault();
+    // 1. input dat URL into input field
+    const followerFieldVal = document.querySelector('#add-follower-input')
+      .value;
+    // 2. regex in dat://
+
+    /*---
+      3. query for dat URL
+      3a. return true or false message if valid dat URL
+    ---*/
+    const followerData = {
+      name: '',
+      url: followURLCheck(followerFieldVal)
+    };
+    if (followerData.url === '') {
+      return null;
+    }
+    // 4. write to following array in profile.json
+    this.setState(
+      {
+        userData: {
+          avatar: this.state.userData.avatar,
+          bio: this.state.userData.bio,
+          name: this.state.userData.name,
+          follows: [...this.state.userData.follows, followerData]
+        }
+      },
+      () => this.changeUserData(this.state.userData)
+    );
+    document.querySelector('#add-follower-input').value = '';
+  };
+
+  updateUserData = e => {
+    e.preventDefault();
+    this.changeUserData(this.state.userData);
+  };
+
+  userDataChange = (e, str) => {
+    this.setState({
+      userData: {
+        ...this.state.userData,
+        [str]: e.target.value
+      }
+    });
+  };
+
+  changeUserData = async userData => {
+    const archive = await new global.DatArchive(urlEnv());
+    await archive.writeFile(`profile.json`, profileContents(userData));
+    this.state.editProfile === true && this.toggleEdit();
+  };
+
+  toggleEdit = () =>
+    this.setState({
+      editProfile: !this.state.editProfile
+    });
+
+  sortedPosts = posts => sortBy(posts, ['createdAt']).reverse();
+
   render() {
-    const sortedPosts = sortBy(this.state.posts, ['createdAt']).reverse();
-    console.log('state', this.state);
     return (
       <Router>
         <div>
@@ -145,7 +201,11 @@ class App extends Component {
                 contentSelectionOpen={this.state.contentSelectionOpen}
                 toggleContentSelection={this.toggleContentSelection}
                 postDisplay={this.state.postDisplay}
-                posts={sortedPosts}
+                posts={this.sortedPosts(
+                  this.state.postDisplay === 'theirs'
+                    ? this.state.theirPosts
+                    : this.state.posts
+                )}
                 isOwner={this.state.isOwner}
                 getPosts={this.getAllPostsSaved}
                 togglePostDisplayFn={this.togglePostDisplay}
@@ -171,6 +231,28 @@ class App extends Component {
                 deletePost={this.deletePostSingle}
                 deadTitle={this.state.deadTitle}
                 deadDescription={this.state.deadDescription}
+                {...props}
+              />
+            )}
+          />
+          <Route
+            path="/settings"
+            render={props => (
+              <Settings
+                contentSelectionOpen={this.state.contentSelectionOpen}
+                toggleContentSelection={this.toggleContentSelection}
+                togglePostDisplayFn={this.togglePostDisplay}
+                getPosts={this.refreshPosts}
+                isOwner={this.state.isOwner}
+                correctBrowser={this.state.correctBrowser}
+                deadTitle={this.state.deadTitle}
+                deadDescription={this.state.deadDescription}
+                userData={this.state.userData}
+                addFollower={this.addFollower}
+                updateUserData={this.updateUserData}
+                userDataChange={this.userDataChange}
+                toggleEdit={this.toggleEdit}
+                editProfile={this.state.editProfile}
                 {...props}
               />
             )}

@@ -1,7 +1,6 @@
 import React from 'react';
 
 import ContentViewLoop from './ContentViewLoop';
-import Settings from './Settings';
 
 const ContentView = ({
   posts,
@@ -27,7 +26,6 @@ const ContentView = ({
           isOwner={isOwner}
         />
       )}
-    {postDisplay === 'settings' && <Settings />}
   </section>
 );
 

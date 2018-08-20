@@ -12,7 +12,6 @@ const ImageForm = ({
   resetImagePath
 }) => (
   <form onSubmit={e => submitFn(e)} encType="multipart/form-data">
-    {console.log('imageFile', imageFile)}
     <div
       className={`${'FormElement'} ${
         titleContent !== '' ? 'FormElementActive' : ''
