@@ -1,10 +1,10 @@
 import React from 'react';
 
 const Follows = ({ follows }) => (
-  <div className="Profile">
+  <div className="Following">
     {follows &&
       follows.map((follow, i) => (
-        <div className="Following-Item" key={i}>
+        <div className="Following__Item" key={i}>
           <a href={follow.url}>{follow.name}</a>
         </div>
       ))}

@@ -95,9 +95,7 @@ class App extends Component {
         return JSON.parse(postResponse);
       });
       const results = await Promise.all(promises);
-      this.setState({
-        posts: results
-      });
+      return results;
     }
   };
 
@@ -132,46 +130,54 @@ class App extends Component {
   };
 
   addFollower = e => {
-    /*---
-      
-      2. regex out dat://
-      3. query for dat URL
-      3a. return true or false message if valid dat URL
-      
-      ---*/
     e.preventDefault();
     // 1. input dat URL into input field
-    let followerFieldVal = document.querySelector('#add-follower-input').value;
+    const followerFieldVal = document.querySelector('#add-follower-input')
+      .value;
+    /*---
+      2. regex in dat://
+      3. query for dat URL
+      3a. return true or false message if valid dat URL
+    ---*/
+    const followerData = {
+      name: 'frogs',
+      url: followerFieldVal
+    };
     // 4. write to following array in profile.json
-    console.log('state', this.state);
     this.setState(
       {
         userData: {
           avatar: this.state.userData.avatar,
           bio: this.state.userData.bio,
           name: this.state.userData.name,
-          follows: [
-            ...this.state.userData.follows,
-            {
-              name: 'name',
-              url: followerFieldVal
-            }
-          ]
+          follows: [...this.state.userData.follows, followerData]
         }
       },
       () => this.changeUserData(this.state.userData)
+      // () => console.log('update', this.state.userData)
     );
   };
 
   updateUserData = e => {
     e.preventDefault();
+    console.log('userdata', this.state.userData);
     this.changeUserData(this.state.userData);
+  };
+
+  userDataChange = (e, str) => {
+    console.log('frogs');
+    this.setState({
+      userData: {
+        ...this.state.userData,
+        [str]: e.target.value
+      }
+    });
   };
 
   changeUserData = async userData => {
     const archive = await new global.DatArchive(urlEnv());
     await archive.writeFile(`profile.json`, profileContents(userData));
-    this.state.toggleEdit === true && this.toggleEdit();
+    this.state.editProfile === true && this.toggleEdit();
   };
 
   toggleEdit = () =>
@@ -243,6 +249,7 @@ class App extends Component {
                 userData={this.state.userData}
                 addFollower={this.addFollower}
                 updateUserData={this.updateUserData}
+                userDataChange={this.userDataChange}
                 toggleEdit={this.toggleEdit}
                 editProfile={this.state.editProfile}
                 {...props}

@@ -11,16 +11,29 @@ const ProfileEdit = ({
     <form onSubmit={e => updateUserData(e)}>
       <div
         className={`${'FormElement'} ${
+          userAvatar !== '' ? 'FormElementActive' : ''
+        }`}
+      >
+        <input
+          type="text"
+          name="title-avatar"
+          value={userAvatar}
+          onChange={e => changeFn(e, 'avatar')}
+        />
+        <label htmlFor="title-avatar">Avatar</label>
+      </div>
+      <div
+        className={`${'FormElement'} ${
           userName !== '' ? 'FormElementActive' : ''
         }`}
       >
         <input
           type="text"
-          name="title"
+          name="title-name"
           value={userName}
           onChange={e => changeFn(e, 'name')}
         />
-        <label htmlFor="title-entry">Name</label>
+        <label htmlFor="title-name">Name</label>
       </div>
       <div
         className={`${'FormElement'} ${
@@ -29,11 +42,11 @@ const ProfileEdit = ({
       >
         <input
           type="text"
-          name="title"
+          name="title-bio"
           value={userBio}
           onChange={e => changeFn(e, 'bio')}
         />
-        <label htmlFor="title-entry">Bio</label>
+        <label htmlFor="title-bio">Bio</label>
       </div>
       <button className={'Button'} type="submit">
         Save Profile

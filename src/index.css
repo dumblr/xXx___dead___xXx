@@ -446,12 +446,10 @@ h5 {
   position: relative;
   width: 120px;
 }
-
 .ImagePreview img {
   height: auto;
   width: 100%;
 }
-
 .ImagePreview__Delete svg {
   cursor: pointer;
   position: absolute;
@@ -459,6 +457,11 @@ h5 {
   top: -15px;
   transform: rotate(45deg);
   width: 25px;
+}
+.UserInfo {
+  margin: 0 auto;
+  max-width: 1440px;
+  padding: 18px 20px;
 }
 .Settings {
   padding-bottom: 100px;
@@ -501,4 +504,14 @@ h5 {
 .Settings .Edit__Toggle img {
   height: auto;
   width: 40px;
+}
+.Following {
+  margin-top: 20px;
+}
+.Following__Item a {
+  color: #000;
+  display: block;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 10px 0;
 }
