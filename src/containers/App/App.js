@@ -12,7 +12,7 @@ class App extends Component {
     this.state = {
       loading: true,
       contentSelectionOpen: false,
-      correctBrowser: false,
+      correctBrowser: true,
       isOwner: false,
       posts: [],
       postDisplay: 'theirs'
@@ -23,12 +23,12 @@ class App extends Component {
     try {
       const archive = await new global.DatArchive(urlEnv());
       const archiveInfo = await archive.getInfo();
-      this.refreshPosts(archive);
+      const allPosts = await this.getAllPosts(archive);
       const userData = await this.getUserInfo(archive);
 
       this.setState({
         correctBrowser: true,
-
+        posts: allPosts,
         loading: false,
         ...(archiveInfo.isOwner && { isOwner: true }),
         deadTitle: archiveInfo.title,
@@ -59,9 +59,30 @@ class App extends Component {
 
   /*
   * This method takes an archive and
-  * returns all of their posts
+  * returns all of their posts. 
+  * It does not setState.
   */
-  refreshPosts = async archive => {
+  getAllPosts = async archive => {
+    const posts = await archive.readdir('/posts');
+    if (posts.length === 0) {
+      this.setState({
+        posts: []
+      });
+    } else {
+      const promises = posts.map(async post => {
+        const postResponse = await archive.readFile(`/posts/${post}`);
+        return JSON.parse(postResponse);
+      });
+      const results = await Promise.all(promises);
+      return results;
+    }
+  };
+
+  /*
+  * Exact same as the above function, but
+  * also sets state.
+  */
+  getAllPostsSaved = async archive => {
     const posts = await archive.readdir('/posts');
     if (posts.length === 0) {
       this.setState({
@@ -100,7 +121,7 @@ class App extends Component {
   deletePost = async postId => {
     const archive = await new global.DatArchive(urlEnv());
     await archive.unlink(`/posts/${postId}.json`);
-    this.refreshPosts(archive);
+    this.getAllPostsSaved(archive);
   };
 
   deletePostSingle = async postId => {
@@ -126,7 +147,7 @@ class App extends Component {
                 postDisplay={this.state.postDisplay}
                 posts={sortedPosts}
                 isOwner={this.state.isOwner}
-                getPosts={this.refreshPosts}
+                getPosts={this.getAllPostsSaved}
                 togglePostDisplayFn={this.togglePostDisplay}
                 correctBrowser={this.state.correctBrowser}
                 deletePost={this.deletePost}
@@ -144,7 +165,7 @@ class App extends Component {
                 contentSelectionOpen={this.state.contentSelectionOpen}
                 toggleContentSelection={this.toggleContentSelection}
                 togglePostDisplayFn={this.togglePostDisplay}
-                getPosts={this.refreshPosts}
+                getPosts={this.getAllPostsSaved}
                 isOwner={this.state.isOwner}
                 correctBrowser={this.state.correctBrowser}
                 deletePost={this.deletePostSingle}
