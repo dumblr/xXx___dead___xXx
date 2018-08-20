@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import sortBy from 'lodash.sortby';
 import urlEnv from '../../utils/urlEnv';
+import profileContents from '../../utils/profileContents';
 import { queryFollowers } from '../../utils/following';
 
 import ContentViewContainer from '../ContentViewContainer';
@@ -18,11 +19,14 @@ class App extends Component {
       isOwner: false,
       posts: [],
       theirPosts: [],
-      postDisplay: 'mine'
+      postDisplay: 'mine',
+      editProfile: false,
+      userData: {}
     };
   }
 
   async componentDidMount() {
+    console.log('hmmm');
     try {
       const archive = await new global.DatArchive(urlEnv());
       const archiveInfo = await archive.getInfo();
@@ -126,9 +130,52 @@ class App extends Component {
   };
 
   addFollower = e => {
-    e.preventDefault;
-    console.log('frogs');
+    /*---
+      
+      2. regex out dat://
+      3. query for dat URL
+      3a. return true or false message if valid dat URL
+      
+      ---*/
+    e.preventDefault();
+    // 1. input dat URL into input field
+    let followerFieldVal = document.querySelector('#add-follower-input').value;
+    // 4. write to following array in profile.json
+    console.log('state', this.state);
+    this.setState(
+      {
+        userData: {
+          avatar: this.state.userData.avatar,
+          bio: this.state.userData.bio,
+          name: this.state.userData.name,
+          follows: [
+            ...this.state.userData.follows,
+            {
+              name: 'name',
+              url: followerFieldVal
+            }
+          ]
+        }
+      },
+      () => this.changeUserData(this.state.userData)
+    );
   };
+
+  updateUserData = e => {
+    e.preventDefault();
+    this.changeUserData(this.state.userData);
+  };
+
+  changeUserData = async userData => {
+    const archive = await new global.DatArchive(urlEnv());
+    await archive.writeFile(`profile.json`, profileContents(userData));
+    this.state.toggleEdit === true && this.toggleEdit();
+  };
+
+  toggleEdit = () =>
+    this.setState({
+      editProfile: !this.state.editProfile
+    });
 
   sortedPosts = posts => sortBy(posts, ['createdAt']).reverse();
 
@@ -192,6 +239,9 @@ class App extends Component {
                 deadDescription={this.state.deadDescription}
                 userData={this.state.userData}
                 addFollower={this.addFollower}
+                updateUserData={this.updateUserData}
+                toggleEdit={this.toggleEdit}
+                editProfile={this.state.editProfile}
                 {...props}
               />
             )}

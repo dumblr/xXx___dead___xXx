@@ -2,24 +2,13 @@ import urlEnv from './urlEnv';
 
 const archive = new global.DatArchive(urlEnv());
 
-export const addFollower = async datUrl => {
-  console.log(datUrl);
-  /*---
-  1. input dat URL into input field
-  2. regex out dat://
-  3. query for dat URL
-  3a. return true or false message if valid dat URL
-  4. write to following array in profile.json
-  ---*/
-};
-
 export const queryFollowers = async () => {
   // 1. get following list
   const userData = await archive.readFile(`profile.json`);
   const followingArray = JSON.parse(userData).follows;
   // 2. map following users
-  await followingArray.map(follow => {
-    queryFollowerPosts(follow);
+  followingArray.map(async follow => {
+    await queryFollowerPosts(follow);
   });
 };
 

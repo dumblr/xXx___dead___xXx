@@ -1,10 +1,9 @@
 import React from 'react';
 import urlEnv from '../../utils/urlEnv';
-import profileContents from '../../utils/profileContents';
 
 import Header from '../../components/Header';
 import Follows from '../../components/Following/Follows';
-import FollowSuggestions from '../../components/Following/FollowSuggestions';
+// import FollowSuggestions from '../../components/Following/FollowSuggestions';
 import NewFollow from '../../components/Following/NewFollow';
 import Profile from '../../components/SharedComponents/Profile';
 
@@ -17,8 +16,7 @@ class Settings extends React.Component {
         bio: '',
         name: '',
         follows: []
-      },
-      editProfile: false
+      }
     };
   }
 
@@ -40,17 +38,6 @@ class Settings extends React.Component {
     });
   };
 
-  changeUserData = async userData => {
-    const archive = await new global.DatArchive(urlEnv());
-    await archive.writeFile(`profile.json`, profileContents(userData));
-    this.toggleEdit();
-  };
-
-  updateUserData = e => {
-    e.preventDefault();
-    this.changeUserData(this.state.userData);
-  };
-
   getUserInfo = async archive => {
     const userData = await archive.readFile(`profile.json`);
     this.setState({
@@ -58,14 +45,7 @@ class Settings extends React.Component {
     });
   };
 
-  toggleEdit = () => {
-    this.setState({
-      editProfile: !this.state.editProfile
-    });
-  };
-
   render() {
-    console.log('props', this.props, this.state);
     return (
       <div className="Settings">
         <Header
@@ -80,7 +60,10 @@ class Settings extends React.Component {
           <div className="Settings__Item">
             <div className="Settings__Title">
               <h2>Profile Settings</h2>
-              <div className="Edit__Toggle" onClick={() => this.toggleEdit()}>
+              <div
+                className="Edit__Toggle"
+                onClick={() => this.props.toggleEdit()}
+              >
                 <img src="/icons/icon-pencil.png" alt="pencil for edit" />
               </div>
             </div>
@@ -88,9 +71,9 @@ class Settings extends React.Component {
               userAvatar={this.state.userData.avatar}
               userName={this.state.userData.name}
               userBio={this.state.userData.bio}
-              editProfile={this.state.editProfile}
+              editProfile={this.props.editProfile}
               changeFn={this.userDataChange}
-              updateUserData={this.updateUserData}
+              updateUserData={this.props.updateUserData}
             />
           </div>
           <div className="Settings__Item">
