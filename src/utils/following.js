@@ -7,9 +7,12 @@ export const queryFollowers = async () => {
   const userData = await archive.readFile(`profile.json`);
   const followingArray = JSON.parse(userData).follows;
   // 2. map following users
-  followingArray.map(async follow => {
-    await queryFollowerPosts(follow);
-  });
+  console.log('followingArray', followingArray);
+  if (followingArray.length > 0) {
+    followingArray.map(async follow => {
+      await queryFollowerPosts(follow);
+    });
+  }
 };
 
 const queryFollowerPosts = async follow => {

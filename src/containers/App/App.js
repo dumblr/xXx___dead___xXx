@@ -45,7 +45,7 @@ class App extends Component {
         userData
       });
     } catch (error) {
-      console.log(error);
+      console.log('try error', error);
       this.setState({
         loading: false,
         correctBrowser: false
@@ -95,7 +95,9 @@ class App extends Component {
         return JSON.parse(postResponse);
       });
       const results = await Promise.all(promises);
-      return results;
+      this.setState({
+        posts: results
+      });
     }
   };
 
@@ -212,6 +214,7 @@ class App extends Component {
             path="/post/:postId"
             render={props => (
               <PostContainer
+                loading={this.state.loading}
                 contentSelectionOpen={this.state.contentSelectionOpen}
                 toggleContentSelection={this.toggleContentSelection}
                 togglePostDisplayFn={this.togglePostDisplay}
