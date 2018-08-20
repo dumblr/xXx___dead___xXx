@@ -15,7 +15,7 @@ class App extends Component {
     this.state = {
       loading: true,
       contentSelectionOpen: false,
-      correctBrowser: false,
+      correctBrowser: true,
       isOwner: false,
       posts: [],
       theirPosts: [],
@@ -119,7 +119,7 @@ class App extends Component {
   deletePost = async postId => {
     const archive = await new global.DatArchive(urlEnv());
     await archive.unlink(`/posts/${postId}.json`);
-    this.refreshPosts(archive);
+    this.getAllPostsSaved(archive);
   };
 
   deletePostSingle = async postId => {
@@ -207,7 +207,7 @@ class App extends Component {
                     : this.state.posts
                 )}
                 isOwner={this.state.isOwner}
-                getPosts={this.refreshPosts}
+                getPosts={this.getAllPostsSaved}
                 togglePostDisplayFn={this.togglePostDisplay}
                 correctBrowser={this.state.correctBrowser}
                 deletePost={this.deletePost}
@@ -225,7 +225,7 @@ class App extends Component {
                 contentSelectionOpen={this.state.contentSelectionOpen}
                 toggleContentSelection={this.toggleContentSelection}
                 togglePostDisplayFn={this.togglePostDisplay}
-                getPosts={this.refreshPosts}
+                getPosts={this.getAllPostsSaved}
                 isOwner={this.state.isOwner}
                 correctBrowser={this.state.correctBrowser}
                 deletePost={this.deletePostSingle}
