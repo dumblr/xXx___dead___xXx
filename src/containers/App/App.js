@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import sortBy from 'lodash.sortby';
 import urlEnv from '../../utils/urlEnv';
 import profileContents from '../../utils/profileContents';
-import { queryFollowers, followURLCheck } from '../../utils/following';
+import { queryFollowers } from '../../utils/following';
 
 import ContentViewContainer from '../ContentViewContainer';
 import Settings from '../Settings';
@@ -26,6 +26,7 @@ class App extends Component {
   }
 
   async componentDidMount() {
+    console.log('hmmm');
     try {
       const archive = await new global.DatArchive(urlEnv());
       const archiveInfo = await archive.getInfo();
@@ -133,19 +134,15 @@ class App extends Component {
     // 1. input dat URL into input field
     const followerFieldVal = document.querySelector('#add-follower-input')
       .value;
-    // 2. regex in dat://
-
     /*---
+      2. regex in dat://
       3. query for dat URL
       3a. return true or false message if valid dat URL
     ---*/
     const followerData = {
-      name: '',
-      url: followURLCheck(followerFieldVal)
+      name: 'frogs',
+      url: followerFieldVal
     };
-    if (followerData.url === '') {
-      return null;
-    }
     // 4. write to following array in profile.json
     this.setState(
       {
@@ -157,16 +154,18 @@ class App extends Component {
         }
       },
       () => this.changeUserData(this.state.userData)
+      // () => console.log('update', this.state.userData)
     );
-    document.querySelector('#add-follower-input').value = '';
   };
 
   updateUserData = e => {
     e.preventDefault();
+    console.log('userdata', this.state.userData);
     this.changeUserData(this.state.userData);
   };
 
   userDataChange = (e, str) => {
+    console.log('frogs');
     this.setState({
       userData: {
         ...this.state.userData,
