@@ -7,7 +7,6 @@ export const queryFollowers = async () => {
   const userData = await archive.readFile(`profile.json`);
   const followingArray = JSON.parse(userData).follows;
   // 2. map following users
-  console.log('followingArray', followingArray);
   if (followingArray.length > 0) {
     followingArray.map(async follow => {
       await queryFollowerPosts(follow);
@@ -34,4 +33,20 @@ const queryFollowerPosts = async follow => {
 
 const writePost = async (post, postId) => {
   await archive.writeFile(`/theirposts/${postId}.json`, post);
+};
+
+export const followURLCheck = async value => {
+  if (
+    value.startsWith('dat://') &&
+    (value.length === 70 || value.length === 71)
+  ) {
+    return value;
+  } else if (
+    !value.startsWith('dat://') &&
+    (value.length === 65 || value.length === 66)
+  ) {
+    return 'dat://' + value;
+  } else {
+    return '';
+  }
 };
